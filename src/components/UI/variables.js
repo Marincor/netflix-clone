@@ -15,7 +15,8 @@ export const Icons = styled.img`
     width: ${(props)=> props.primary? '14px': '20px'};
     height: ${(props)=> props.primary? '14px': '20px'};
     margin-bottom: ${(props)=> props.primary? '0.5rem': '0rem'}; ;
-    filter: invert(100%);
+    filter: ${(props)=> props.inverted ? 'invert(100%)': 'none'}; ;
+    
 
 `
 
@@ -42,11 +43,15 @@ export const ItemLinks = styled.a `
 export const BotaoDefault =  styled.button `
 
 
-    background-color: transparent;
-    width:auto ;
-    height: auto;
+    background-color:  ${(props)=> props.inverted ? 'white': 'transparent'}; ;;
+    width: ${(props)=> props.inverted ? '175px': 'auto'}; ;; ;
+    height: ${(props)=> props.inverted ? '62px': 'auto'}; ;;;
     border: none;
     cursor: pointer;
+    border-radius:0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 
 `

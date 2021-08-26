@@ -11,10 +11,12 @@ import Setdown from "../../assets/img/setdown.svg";
 const ContainerHeader = styled.header`
   display: flex;
   background-color: black;
-  width: auto;
+  width: 100vw;
   height: 82px;
   align-items: center;
   justify-content: space-between;
+  position: fixed;
+  z-index: 2000;
 `;
 
 const Box1 = styled.nav`
@@ -73,17 +75,17 @@ export function Header() {
       </Box1>
       <Box2>
         <BotaoDefault>
-          <Icons src={Search} alt='search-icon' />
+          <Icons inverted src={Search} alt='search-icon' />
         </BotaoDefault>
 
-        <BotaoDefault>  <Icons src={Gift} alt='gift-icon'/>;</BotaoDefault>
+        <BotaoDefault>  <Icons inverted src={Gift} alt='gift-icon'/>;</BotaoDefault>
           
-          <BotaoDefault><Icons src={Bell} alt='bell-icon'/>;</BotaoDefault>
+          <BotaoDefault><Icons inverted src={Bell} alt='bell-icon'/>;</BotaoDefault>
 
           <BotaoDefault> 
               
               <ProfileIcon src={ProfileImg} alt='profile-default-img'/>
-                <Icons primary src={Setdown} alt='arrow-down'/>;
+                <Icons primary inverted src={Setdown} alt='arrow-down'/>;
           
           </BotaoDefault>
             
