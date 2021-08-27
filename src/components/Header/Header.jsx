@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { BotaoDefault, Icons, ItemLinks, Logo, ProfileIcon } from "../UI/variables";
+import { BotaoDefault, Icons, ItemLinks, Logo, ProfileIcon } from "../UI/index";
 import Netflix from "../../assets/img/NetflixLogo.svg";
 import Search from "../../assets/img/search.svg";
 import Gift from   "../../assets/img/gift.svg";
 import Bell from  "../../assets/img/bell.svg";
 import ProfileImg from   "../../assets/img/profileImg.svg";
 import Setdown from "../../assets/img/setdown.svg";
+import { GlobalFont } from "../UI/variables";
+
 
 const ContainerHeader = styled.header`
   display: flex;
@@ -17,6 +19,7 @@ const ContainerHeader = styled.header`
   justify-content: space-between;
   position: fixed;
   z-index: 2000;
+ font-family: ${GlobalFont};
 `;
 
 const Box1 = styled.nav`
@@ -27,6 +30,7 @@ const Box1 = styled.nav`
   width: 381px;
   height: 18px;
   margin-left: 2rem;
+
 `;
 
 const Menu = styled.ul`
@@ -36,6 +40,7 @@ const Menu = styled.ul`
   margin-top: 1.4rem;
   align-items: flex-end;
   justify-content: center;
+
 `;
 
 const Box2 = styled.nav`
@@ -66,7 +71,7 @@ export function Header() {
             <ItemLinks href="/">Filmes</ItemLinks>{" "}
           </li>
           <li>
-            <ItemLinks href="/">Bombando</ItemLinks>{" "}
+            <ItemLinks href="/">Popular</ItemLinks>{" "}
           </li>
           <li>
             <ItemLinks href="/">Lista</ItemLinks>{" "}

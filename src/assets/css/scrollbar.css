@@ -1,0 +1,14 @@
+::-webkit-scrollbar              { 
+
+background-color: rgb(161, 159, 159);
+width: 1px;
+ 
+ }
+
+
+*{
+
+    scrollbar-color: rgb(161, 159, 159);
+  scrollbar-width: thin;
+
+} 
