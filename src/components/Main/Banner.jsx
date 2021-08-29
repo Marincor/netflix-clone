@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BotaoDefault, Icons } from "../UI/index";
 import Play from "../../assets/img/play.svg";
-import { ApiMovie } from "../../services/services";
+import { ApiMovie, ApiMovieVideos } from "../../services/services";
 import { GlobalFont } from "../UI/variables";
 import Star from "../../assets/img/red-star.svg";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Route, Switch } from "react-router";
+import { Link } from "react-router-dom";
+import Lottie from "react-lottie";
+import animationData from "../../assets/lotties/close.json";
 
 const Banner = styled.section`
   display: flex;
@@ -68,6 +73,25 @@ const MovieMetadescription = styled.p`
   overflow: auto;
 `;
 
+const BoxTrailer = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const MovieTrailer = styled.iframe`
+  width: 90%;
+  height: 90%;
+  position: relative;
+`;
+
+const BtnTrailer = styled(BotaoDefault)`
+  position: relative;
+`;
+
 export default () => {
   const [movieTitle, setMovieTitle] = useState("");
   const [movieInfo, setMovieInfo] = useState("");
@@ -77,14 +101,43 @@ export default () => {
   const [movieNote, setMovieNote] = useState("");
   const [movieGenre, setMovieGenre] = useState("");
 
+  const [movieTrailer, setmovieTrailer] = useState("");
+
+  const defaultOptions = {
+    loop: false,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
+
+
   useEffect(() => {
+    ApiMovieVideos().then((data) => {
+      if (
+        data.status_message === "The resource you requested could not be found."
+      ) {
+        console.log("erro " + data.status_message);
+      } else {
+        console.log(data.videos.results.length);
+
+        data.videos.results.length > 1
+          ? setmovieTrailer(data.videos.results[0].key)
+          : console.log("sem video");
+      }
+
+      // <iframe width="560" height="315" src="https://www.youtube.com/embed/pz3PMQZFjdc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    });
+
     ApiMovie().then((data) => {
       if (
         data.status_message === "The resource you requested could not be found."
       ) {
         console.log("error - " + data.status_messag);
 
-        setMovieTitle("Memento");
+        setMovieTitle("Amnésia");
         setMovieReleaseYear("2001");
         setMovieGenre("Thriller");
         setMovieNote("8.4");
@@ -95,6 +148,7 @@ export default () => {
         setPosteRMovie(
           `https://www.themoviedb.org/t/p/original/q2CtXYjp9IlnfBcPktNkBPsuAEO.jpg`
         );
+        setmovieTrailer("sHRiMXd5fos");
       } else {
         const newDate = (date) => {
           const ArrayDate = date.split("-") || "nothing";
@@ -104,9 +158,7 @@ export default () => {
 
         const releaseDateFormated = newDate(data.release_date);
 
-        console.log(data.genres[0].name);
-        const newData = data.release_date;
-        setMovieTitle(data.original_title);
+        setMovieTitle(data.title);
         setMovieReleaseYear(releaseDateFormated);
         setMovieGenre(data.genres[0].name);
         setMovieNote(data.vote_average);
@@ -120,22 +172,58 @@ export default () => {
   }, []);
 
   return (
-    <Banner poster={posterMovie}>
-      <BoxContent>
-        <MovieTitleBanner>{movieTitle}</MovieTitleBanner>
-        <MovieInfoYear>
-          Data de lançamento: {movieReleaseYear} | Gênero: {movieGenre} | Nota
-          da comunidade: {movieNote} <Icons src={Star} />{" "}
-        </MovieInfoYear>
-        <MovieInfo>{movieInfo}</MovieInfo>
-        <MovieMetadescription>{movieMetaDescription}</MovieMetadescription>
-        <div className="div_btn">
-          <BotaoDefault inverted>
-            {" "}
-            <Icons src={Play} alt="play-icon" /> Play
-          </BotaoDefault>
-        </div>
-      </BoxContent>
-    </Banner>
+    <Router>
+      <Banner poster={posterMovie}>
+        <Switch>
+          <Route exact path="/">
+            <BoxContent>
+              <MovieTitleBanner>{movieTitle}</MovieTitleBanner>
+              <MovieInfoYear>
+                Data de lançamento: {movieReleaseYear} | Gênero: {movieGenre} |
+                Nota da comunidade: {movieNote} <Icons src={Star} />{" "}
+              </MovieInfoYear>
+              <MovieInfo>{movieInfo}</MovieInfo>
+              <MovieMetadescription>
+                {movieMetaDescription}
+              </MovieMetadescription>
+              <div className="div_btn">
+                <Link className="btn__link" to="/trailer">
+                  <BotaoDefault inverted>
+                    {" "}
+                    <Icons src={Play} alt="play-icon" /> Play
+                  </BotaoDefault>
+                </Link>
+              </div>
+            </BoxContent>
+          </Route>
+
+          <Route path="/trailer">
+            <BoxTrailer>
+              <Link className="btn__link" to="/">
+                <BtnTrailer>
+                  <div>
+                    <Lottie
+                      options={defaultOptions}
+                      height={50}
+                      width={50}
+                    />
+                  </div>
+                </BtnTrailer>
+              </Link>
+              <MovieTrailer
+                width="560"
+                allow="autoplay"
+                height="315"
+                src={`https://www.youtube.com/embed/${movieTrailer}?autoplay=1&mute=1`}
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></MovieTrailer>
+            </BoxTrailer>
+          </Route>
+        </Switch>
+      </Banner>
+    </Router>
   );
 };

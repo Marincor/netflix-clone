@@ -35,4 +35,5 @@ export const BotaoDefault = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  
 `;
