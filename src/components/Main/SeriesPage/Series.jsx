@@ -75,7 +75,7 @@ export default () => {
     ApiTvSeriesPage(pageSeries).then((data) => setSeries(data.results));
   });
 
-  console.log(series[0]);
+ 
 
   return (
     <BoxContent paddingTop={"10rem"} primaryColor={"black"}>

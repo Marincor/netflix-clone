@@ -7,6 +7,7 @@ import {
 import "@brainhubeu/react-carousel/lib/style.css";
 import { ApiPopularMovies } from "../../../services/services";
 import { BoxSlider, BoxCards, CardSession } from "../../UI/variables";
+import { Link } from "react-router-dom";
 
 
 
@@ -45,7 +46,9 @@ export default () => {
 
   return (
     <BoxSlider>
+      <Link className='btn__link' to='/popular'>
       <CardSession>Populares:</CardSession>
+      </Link>
       <Carousel
         className="slider"
         plugins={[

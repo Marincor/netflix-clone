@@ -7,6 +7,7 @@ import Bell from "../../assets/img/bell.svg";
 import ProfileImg from "../../assets/img/profileImg.svg";
 import Setdown from "../../assets/img/setdown.svg";
 
+
 const Box2 = styled.nav`
   width: 248px;
   height: 32px;
@@ -16,27 +17,14 @@ const Box2 = styled.nav`
 `;
 
 export default () => {
+ 
+ 
+
   function showSearchInput() {
     const searchInput = document.querySelector(`[data-search]`);
     searchInput.classList.remove("search");
   }
 
-  // - - ----------HiddenSearchInput function \/  - -- - - -//
-
-  window.addEventListener("click", (e) => {
-    const searchInput = document.querySelector(`[data-search]`);
-    const section = document.querySelector("section");
-    const div = document.querySelector("div");
-
-    if (
-      e.explicitOriginalTarget === section ||
-      e.explicitOriginalTarget === div
-    ) {
-      if (!searchInput.classList.contains("search")) {
-        searchInput.classList.add("search");
-      }
-    }
-  });
   return (
     <Box2>
       <BotaoDefault data-search-btn>

@@ -7,7 +7,7 @@ import {
 import "@brainhubeu/react-carousel/lib/style.css";
 import { ApiMovieTopRated } from "../../../services/services";
 import { BoxSlider, BoxCards, CardSession } from "../../UI/variables";
-
+import { Link } from "react-router-dom";
 
 
 export default () => {
@@ -44,7 +44,10 @@ export default () => {
 
   return (
     <BoxSlider>
-      <CardSession>Bem avaliados:</CardSession>
+      <Link className='btn__link' to='/bem-avaliados'>
+          <CardSession>Bem avaliados:</CardSession>
+      </Link>
+     
       <Carousel
         className="slider"
         plugins={[

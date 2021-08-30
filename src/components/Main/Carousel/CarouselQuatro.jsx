@@ -7,7 +7,7 @@ import {
 import "@brainhubeu/react-carousel/lib/style.css";
 import { ApiTvSeries } from "../../../services/services";
 import { BoxSlider, BoxCards, CardSession } from "../../UI/variables";
-
+import { Link } from "react-router-dom";
 
 
 export default () => {
@@ -37,14 +37,16 @@ export default () => {
   }, []);
 
 
-  console.log(posters[0], posters[1]);
+
 
 
 /* because of an error in the carousel component library, I decided to set manually the images background in render, instead of an map method in the array */
 
   return (
     <BoxSlider>
-      <CardSession>Séries do momento:</CardSession>
+      <Link to='/series' className='btn__link'>
+         <CardSession>Séries do momento:</CardSession>
+      </Link>
       <Carousel
         className="slider"
         plugins={[

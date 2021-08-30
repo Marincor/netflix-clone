@@ -36,7 +36,11 @@ export default () => {
     console.log(searchContent);
     setSearchInput({ ...searchInput, content: searchContent });
 
-    document.querySelector(`[data-input-search]`).value = '';
+    document.querySelector(`[data-input-search]`).value = "";
+
+    // hiddenSearchInput //
+    const form = e.target;
+    form.classList.add("search");
   }
 
   return (
