@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { SearchContext } from "../../contexts/SearchContext";
 import { GlobalFont } from "../UI/variables";
 
 const SearchInput = styled.input`
@@ -8,44 +9,43 @@ const SearchInput = styled.input`
   font-family: ${GlobalFont};
   padding: 0.5rem;
   border-radius: 1rem;
-  animation: anime .5s;
+  animation: anime 0.5s;
+  width: 50%;
 
+  margin-left: 15rem;
   @keyframes anime {
     from {
-
-      transform: translate3d(100px, 0,0);
+      transform: translate3d(100px, 0, 0);
     }
 
-    to{
-      transform: translate3d(0,0,0);
+    to {
+      transform: translate3d(0, 0, 0);
     }
-
-
   }
-
-
 `;
 
 export default () => {
+  const history = useHistory();
+  const { searchInput, setSearchInput } = React.useContext(SearchContext);
 
-  const history = useHistory()
-
-
-  function search (e) {
+  function search(e) {
     e.preventDefault();
- 
 
-    history.push('/resultado-de-busca')
-    const searchContent = e.target[0].value;
-        sessionStorage.setItem('searchContent', searchContent)
+    history.push("/resultado-de-busca");
+    const searchContent = document.querySelector(`[data-input-search]`).value;
+    console.log(searchContent);
+    setSearchInput({ ...searchInput, content: searchContent });
 
+    document.querySelector(`[data-input-search]`).value = '';
   }
 
-
-
   return (
-    <form className="search" onSubmit={search}>
-      <SearchInput placeholder="Digite o nome desejado..." type="text" />
+    <form className="search" data-search onSubmit={search}>
+      <SearchInput
+        data-input-search
+        placeholder="Digite o nome desejado..."
+        type="text"
+      />
     </form>
   );
 };

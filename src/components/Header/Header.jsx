@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { SearchProvider } from "../../contexts/SearchContext";
 
 import { GlobalFont } from "../UI/variables";
 import BoxAnchors from "./BoxAnchors";
@@ -29,7 +30,11 @@ export function Header() {
     <ContainerHeader>
       <BoxAnchors />
 
+     
+
       <SearchForm />
+      
+    
 
       <BoxIcons />
     </ContainerHeader>

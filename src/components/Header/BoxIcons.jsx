@@ -17,31 +17,29 @@ const Box2 = styled.nav`
 
 export default () => {
   function showSearchInput() {
-    const searchInput = document.querySelector(`form`);
+    const searchInput = document.querySelector(`[data-search]`);
     searchInput.classList.remove("search");
-
   }
 
   // - - ----------HiddenSearchInput function \/  - -- - - -//
 
-  window.addEventListener('click' ,(e) => {
-    const searchInput = document.querySelector(`form`);
-    const input = document.querySelector(`input`);
-    const button = document.querySelector(`button`);
-    
+  window.addEventListener("click", (e) => {
+    const searchInput = document.querySelector(`[data-search]`);
+    const section = document.querySelector("section");
+    const div = document.querySelector("div");
 
-      if(e.path[0] != input && e.path[1] !=  button ) {
-
-      searchInput.classList.add('search')
+    if (
+      e.explicitOriginalTarget === section ||
+      e.explicitOriginalTarget === div
+    ) {
+      if (!searchInput.classList.contains("search")) {
+        searchInput.classList.add("search");
       }
-
-    
-     
-
-  } )
+    }
+  });
   return (
     <Box2>
-      <BotaoDefault>
+      <BotaoDefault data-search-btn>
         <Icons
           inverted
           onClick={showSearchInput}

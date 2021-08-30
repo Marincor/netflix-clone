@@ -71,6 +71,7 @@ const MovieMetadescription = styled.p`
   width: 80%;
   height: 20%;
   overflow: auto;
+  line-height: 1.5rem;
 `;
 
 const BoxTrailer = styled.div`

@@ -10,6 +10,7 @@ import Series from "./components/Main/SeriesPage/Series";
 import MoviesPage from "./components/Main/MoviesPage/MoviesPage";
 import PopularPage from "./components/Main/PopularPage/PopularPage";
 import SearchPage from "./components/Main/SearchPage/SearchPage";
+import { SearchContext, SearchProvider } from "./contexts/SearchContext";
 
 
 
@@ -18,8 +19,12 @@ function App() {
   return (
     <Router>
        <GlobalStyle />
+
+       <SearchProvider>
        <Header/>
 
+     
+    
 
         <Switch>
        
@@ -41,13 +46,16 @@ function App() {
             <PopularPage/>
           </Route>
           <Route exact path='/resultado-de-busca'>
+            
 
-                <SearchPage/>
+                   <SearchPage/>
+            
+                
             </Route>
         
 
         </Switch>
-     
+        </SearchProvider>
     </Router>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { ApiSearchItens } from "../../../services/services";
 import { BotaoDefault } from "../../UI";
 import {
@@ -10,6 +10,7 @@ import {
 import Lottie from "react-lottie";
 import arrowNext from "../../../assets/lotties/arrow-forward.json";
 import arrowPrevious from "../../../assets/lotties/arrow-back.json";
+import { SearchContext } from "../../../contexts/SearchContext";
 
 
 export default () => {
@@ -43,10 +44,13 @@ export default () => {
 
   // pages config //
 
-  const [pageSeries, setPageSeries] = useState(1);
-  const [contentSearch, setContentSearch] = useState('.')
-  const [series, setSeries] = useState([]);
+  const {searchInput} = React.useContext(SearchContext);
 
+  
+
+  const [pageSeries, setPageSeries] = useState(1);
+  const [contentSearch, setContentSearch] = useState(searchInput.content || '.')
+  const [series, setSeries] = useState([]);
   function previousPage() {
     if (pageSeries != 1) {
       setArrowBack({ ...arrowBack, isStopped: !arrowBack.isStopped });
@@ -75,22 +79,21 @@ export default () => {
 
   useEffect(() => {
     ApiSearchItens(contentSearch,pageSeries).then((data) => setSeries(data.results));
-
+   
+   
         const form = document.querySelector('form');
         
         form.addEventListener('submit', (e)=>{
                 e.preventDefault();
                 const typedContent = e.target[0].value;
-                const teste = sessionStorage.getItem('searchContent');
-
-                console.log(teste)
+            
 
                if(typedContent != '') {
 
               
-
                 setContentSearch(typedContent)
-                    
+            
+                  
             
                    
                }
@@ -100,8 +103,8 @@ export default () => {
 
         })
 
-
-  });
+       
+  }) ;
 
  
 
@@ -110,6 +113,7 @@ export default () => {
       {series.map((item, index) => {
         return (
           <>
+        
             <BoxCardsItems
               key={index}
               poster={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${item.poster_path}`}
@@ -118,8 +122,9 @@ export default () => {
         );
       })}
       <BoxArrows>
-        {" "}
+       
         <BotaoDefault onClick={previousPage}>
+          <p>teste</p>
           <BoxLottie className="teste">
             <Lottie
               options={defaultOptions2}
