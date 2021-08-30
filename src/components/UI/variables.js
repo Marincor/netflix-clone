@@ -48,6 +48,29 @@ export const BoxCards = styled.div`
 
 `;
 
+export const BoxCardsItems = styled.div`
+
+
+  margin-top: 2rem;
+  width: 285px;
+  height: 420px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 1rem;
+  background-position: bottom;
+  background-image: ${(props) =>
+    props.poster ? `url(${props.poster})` : `url(${Netflix})`};
+  cursor: pointer;
+  display: flex;
+  background-color: #adadc0;
+  display: flex;
+  align-items: flex-end;
+
+ 
+
+
+`;
+
 
 export const CardSession = styled.h2`
   font-size: 2rem;
@@ -63,6 +86,34 @@ export const BoxLottie= styled.div `
     justify-content: center;
     align-items: center;
     background-color: black;
-    width: 100vw;
+    width: ${(props) => props.primary};
+
+`
+
+export const BoxContent = styled.section`
+  background-color: ${(props) => props.primaryColor? props.primaryColor : 'white'};
+  width: 100%;
+  height: auto;
+  color: white;
+  padding-top: ${(props) => props.paddingTop};
+  margin-left:1rem;
+  display: flex;
+  flex-wrap: wrap;
+ 
+  
+
+`;
+
+
+
+export const BoxArrows = styled.div `
+
+
+    display: flex;
+    background-color: transparent;
+    flex-direction: row;
+    width: auto;
+    justify-content: space-between;
+    
 
 `

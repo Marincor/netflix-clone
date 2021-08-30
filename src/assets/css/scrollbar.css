@@ -12,3 +12,10 @@ width: 1px;
   scrollbar-width: thin;
 
 } 
+
+html{
+
+  background-color: black;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

@@ -5,7 +5,7 @@ import {
   autoplayPlugin,
 } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
-import { ApiMovieTopRated } from "../../../services/services";
+import { ApiTvSeries } from "../../../services/services";
 import { BoxSlider, BoxCards, CardSession } from "../../UI/variables";
 
 
@@ -19,9 +19,9 @@ export default () => {
 
     
 
-    ApiMovieTopRated().then((data) => {
+    ApiTvSeries().then((data) => {
       let arrPoster = [];
-  
+        console.log(data)
   
       data.results.map((item) => {
         arrPoster.push(item.poster_path);
@@ -44,7 +44,7 @@ export default () => {
 
   return (
     <BoxSlider>
-      <CardSession>Bem avaliados:</CardSession>
+      <CardSession>Séries do momento:</CardSession>
       <Carousel
         className="slider"
         plugins={[

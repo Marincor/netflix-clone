@@ -17,7 +17,7 @@ export const ProfileIcon = styled.img`
   height: 32px;
 `;
 
-export const ItemLinks = styled.a`
+export const ItemLinks = styled.p`
   text-decoration: none;
   width: 68px;
   height: 18px;

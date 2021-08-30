@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Banner from "./Banner";
-import BoxContent from "./BoxContent";
+import BoxContentHome from "./Homepage/BoxContentHome";
+
 
 
 const ContainerMain = styled.main`
@@ -15,8 +16,10 @@ const ContainerMain = styled.main`
 export function Main() {
   return (
     <ContainerMain>
-      <Banner />
-      <BoxContent/>
+  
+         <Banner />
+          <BoxContentHome/>
+  
     </ContainerMain>
   );
 }

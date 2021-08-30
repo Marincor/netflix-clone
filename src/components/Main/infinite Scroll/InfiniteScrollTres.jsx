@@ -1,25 +1,15 @@
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Carousel from "../Carousel/Carousel";
-import InfiniteScrollDois from "./InfiniteScrollDois";
 import Lottie from 'react-lottie';
 import animationData from '../../../assets/lotties/load.json'
 import { BoxLottie } from "../../UI/variables";
-
-
-
-
-
+import CarouselTres from "../Carousel/CarouselTres";
+import InfiniteScrollQuatro from "./InfiniteScrollQuatro";
 
 
 export default () => {
-
-
     const [items, setItems] = useState(Array.from({ length: 0.1 }));
     const [hasMore, setHasMore] = useState(true);
-
-
-
 
     function fetchMoreData() {
         if (items.length >= 1) {
@@ -34,16 +24,15 @@ export default () => {
         }, 1500);
       }
 
-      // lottie animation //
-      const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animationData,
-        rendererSettings: {
-          preserveAspectRatio: "xMidYMid slice"
-        }
-      };
-
+ // lottie animation //
+ const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice"
+    }
+  };
 
 
     return(
@@ -51,13 +40,13 @@ export default () => {
         dataLength={items.length}
         next={fetchMoreData}
         hasMore={hasMore}
-        loader={ <BoxLottie primary={'100vw'}>
-          <Lottie 
-          options={defaultOptions}
-            height={50}
-            width={50}
-          />
-        </BoxLottie>}
+        loader={<BoxLottie>
+            <Lottie 
+            options={defaultOptions}
+              height={50}
+              width={50}
+            />
+          </BoxLottie>}
        
       >
       
@@ -65,8 +54,8 @@ export default () => {
 
        
         <div>
-            <Carousel />
-            <InfiniteScrollDois/>
+            <CarouselTres/>
+            <InfiniteScrollQuatro/>
         </div>
        
               

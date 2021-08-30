@@ -4,6 +4,7 @@ import CarouselDois from "../Carousel/CarouselDois";
 import Lottie from 'react-lottie';
 import animationData from '../../../assets/lotties/load.json'
 import { BoxLottie } from "../../UI/variables";
+import InfiniteScrollTres from "./InfiniteScrollTres";
 
 
 export default () => {
@@ -54,6 +55,7 @@ export default () => {
        
         <div>
             <CarouselDois/>
+            <InfiniteScrollTres/>
         </div>
        
               
