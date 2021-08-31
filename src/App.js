@@ -11,8 +11,10 @@ import MoviesPage from "./components/Main/MoviesPage/MoviesPage";
 import PopularPage from "./components/Main/PopularPage/PopularPage";
 import SearchPage from "./components/Main/SearchPage/SearchPage";
 import { SearchProvider } from "./contexts/SearchContext";
-import { DisplayProvider } from "./contexts/DisplayHomePageContext";
 import InitialLoad from "./components/Main/Homepage/InitialLoad";
+import ComingSoonPage from "./components/Main/ComingSoonPage/ComingSoonPage";
+import TopRated from "./components/Main/TopRated/TopRated";
+import Page404 from "./components/Page404/Page404";
 
 function App() {
 
@@ -82,6 +84,17 @@ function App() {
           <Route exact path="/resultado-de-busca">
             <SearchPage />
           </Route>
+            <Route exact path='/em-breve' >
+              <ComingSoonPage/>
+            </Route>
+            <Route exact path='/bem-avaliados' >
+              <TopRated/>
+            </Route>
+
+            <Route>
+                <Page404/>
+            </Route>
+
         </Switch>
       </SearchProvider>
     </Router>

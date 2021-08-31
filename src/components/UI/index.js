@@ -37,3 +37,10 @@ export const BotaoDefault = styled.button`
   align-items: center;
   
 `;
+
+export const Box = styled.div`
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  color: black;
+`;

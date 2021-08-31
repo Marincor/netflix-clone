@@ -1,15 +1,10 @@
 import React from "react";
-import styled from "styled-components";
 import Lottie from "react-lottie";
 import NetflixLogoAnimation from "../../../assets/lotties/netflix-anime.json";
+import { Box } from "../../UI";
 import { BoxLottie } from "../../UI/variables";
 
-const Box = styled.div`
-  background-color: black;
-  width: 100vw;
-  height: 100vh;
-  color: black;
-`;
+
 
 export default () => {
   const defaultOptions = {

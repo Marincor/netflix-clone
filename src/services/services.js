@@ -68,7 +68,24 @@ export async function ApiTvSeriesPage (e) {
 
 } 
 
+export async function ApiMovieComingSoonPage (e) {
 
+  const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${key}&language=pt-BR&page=${e}`
+ return await fetch(url).then((response) => response.json());
+
+
+
+}
+
+export async function ApiMovieTopRatedPage (e) {
+
+  const url = `
+  https://api.themoviedb.org/3/movie/top_rated?api_key=${key}&language=pt-BR&page=${e}`
+ return await fetch(url).then((response) => response.json());
+
+
+
+}
 
 //  - - - - -- Pages link in NavBar menu - - - - - - - //
 
@@ -85,6 +102,8 @@ export async function ApiPopularTrendingPage() {
 }
 
 
+
+
 //  - - - - -- Search - - - - - - - //
 
 
@@ -94,3 +113,4 @@ export async function ApiSearchItens(e, num) {
 
   return await fetch(url).then((response) => response.json());
 }
+
