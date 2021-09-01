@@ -50,7 +50,7 @@ const Box1 = styled.nav`
           </Link>
         </li>
         <li>
-          <Link className="btn__link" to="/lista">
+          <Link className="btn__link" to="/lista/1">
           <ItemLinks href="/">Lista</ItemLinks>
           </Link>
          

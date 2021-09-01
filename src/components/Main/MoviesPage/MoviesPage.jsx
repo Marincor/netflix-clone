@@ -20,6 +20,8 @@ import { ListContext } from "../../../contexts/UserListContext";
 
 
 const MoviesPage = () => {
+
+
   // Lottie config / /
   const [arrowForward, setArrowForward] = useState({
     isStopped: true,
@@ -95,6 +97,7 @@ const MoviesPage = () => {
 
   let vetorIdMovies = moviesId.arr || [];
 
+
  
   
 
@@ -102,10 +105,13 @@ const MoviesPage = () => {
 
   function HandleList(e) {
     const currentMovie = e.target.parentElement.id;
-console.log(e)
+ 
     vetorIdMovies.push(currentMovie);
+   
+
     setMoviesId({ ...moviesId, arr: vetorIdMovies });
     localStorage.setItem('userMovieList', JSON.stringify( vetorIdMovies))
+  
   }
 
   return (

@@ -7,7 +7,7 @@ import { GlobalFont } from "../UI/variables";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch } from "react-router";
 import { Link } from "react-router-dom";
-import Lottie from "react-lottie";
+import Lottie from "react-lottie-player";
 import animationData from "../../assets/lotties/close.json";
 import Detail from '../../assets/img/detail.svg'
 
@@ -107,14 +107,6 @@ const Banner = () => {
 
   const [movieTrailer, setmovieTrailer] = useState("");
 
-  const defaultOptions = {
-    loop: false,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
 
 
 
@@ -207,11 +199,12 @@ const Banner = () => {
               <Link className="btn__link" to="/">
                 <BtnTrailer>
                   <div>
-                    <Lottie
-                      options={defaultOptions}
-                      height={50}
-                      width={50}
-                    />
+                  <Lottie
+            loop
+            animationData={animationData}
+            play
+            style={{ width: 50, height: 50 }}
+          />
                   </div>
                 </BtnTrailer>
               </Link>

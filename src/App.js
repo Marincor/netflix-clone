@@ -16,6 +16,7 @@ import ComingSoonPage from "./components/Main/ComingSoonPage/ComingSoonPage";
 import TopRated from "./components/Main/TopRated/TopRated";
 import Page404 from "./components/Page404/Page404";
 import ListPage from "./components/Main/ListPage/ListPage";
+import ListPageDois from "./components/Main/ListPage/ListPage2";
 import { ListProvider } from "./contexts/UserListContext";
 
 function App() {
@@ -72,10 +73,14 @@ function App() {
             <Route exact path="/bem-avaliados">
               <TopRated />
             </Route>
-            <Route exact path="/lista">
+            <Route exact path="/lista/1">
               <ListPage />
+             
             </Route>
-
+            <Route exact path="/lista/2">
+              <ListPageDois />
+             
+            </Route>
             <Route>
               <Page404 />
             </Route>

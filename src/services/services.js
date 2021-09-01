@@ -126,3 +126,9 @@ export async function ApiMovieList(id) {
 
   return await fetch(url).then((response) => response.json());
 }
+
+export async function ApiSeriesList(id) {
+  const url = `https://api.themoviedb.org/3/tv/${id}?api_key=${key}&language=pt-BR`;
+
+  return await fetch(url).then((response) => response.json());
+}

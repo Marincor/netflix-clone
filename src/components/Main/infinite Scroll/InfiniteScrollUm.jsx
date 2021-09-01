@@ -1,89 +1,52 @@
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import InfiniteScrollDois from "./InfiniteScrollDois";
-import Lottie from 'react-lottie';
-import animationData from '../../../assets/lotties/load.json'
+import Lottie from "react-lottie-player";
+import animationData from "../../../assets/lotties/load.json";
 import { BoxLottie } from "../../UI/variables";
 import CarouselUm from "../Carousel/Carousel";
 
+const InfiniteScrollUm = () => {
+  const [items, setItems] = useState(Array.from({ length: 0.1 }));
+  const [hasMore, setHasMore] = useState(true);
 
+  function fetchMoreData() {
+    if (items.length >= 1) {
+      setHasMore(false);
+      return;
+    }
 
+    // a fake async api call like which sends
+    // 20 more records in 1.5 secs
+    setTimeout(() => {
+      setItems(items.concat(Array.from({ length: 1 })));
+    }, 1500);
+  }
 
-
-
-
- const  InfiniteScrollUm = () => {
-
-
-    const [items, setItems] = useState(Array.from({ length: 0.1 }));
-    const [hasMore, setHasMore] = useState(true);
-
-
-
-
-    function fetchMoreData() {
-        if (items.length >= 1) {
-          setHasMore(false);
-          return;
-        }
-    
-        // a fake async api call like which sends
-        // 20 more records in 1.5 secs
-        setTimeout(() => {
-          setItems(items.concat(Array.from({ length: 1})));
-        }, 1500);
-      }
-
-      // lottie animation //
-      const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animationData,
-        rendererSettings: {
-          preserveAspectRatio: "xMidYMid slice"
-        }
-      };
-
-
-
-    return(
-<InfiniteScroll
-        dataLength={items.length}
-        next={fetchMoreData}
-        hasMore={hasMore}
-        loader={ <BoxLottie primary={'100vw'}>
-          <Lottie 
-          options={defaultOptions}
-            height={50}
-            width={50}
+  return (
+    <InfiniteScroll
+      dataLength={items.length}
+      next={fetchMoreData}
+      hasMore={hasMore}
+      loader={
+        <BoxLottie primary={"100vw"}>
+          <Lottie
+            loop
+            animationData={animationData}
+            play
+            style={{ width: 50, height: 50 }}
           />
-        </BoxLottie>}
-       
-      >
-      
+        </BoxLottie>
+      }
+    >
       {items.map((i, index) => (
-
-       
-        <div>
-            <CarouselUm />
-            <InfiniteScrollDois/>
+        <div key={`DivInfiniteScrollUm - ${index}`}>
+          <CarouselUm />
+          <InfiniteScrollDois />
         </div>
-       
-              
-       
-    ))}
-            
-    
-           
-            
-      
-      </InfiniteScroll>
+      ))}
+    </InfiniteScroll>
+  );
+};
 
-
-    )
-
-
-}
-
-
-export default InfiniteScrollUm
+export default InfiniteScrollUm;
