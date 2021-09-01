@@ -19,38 +19,81 @@ const Box1 = styled.nav`
   width: 381px;
   height: 18px;
   margin-left: 2rem;
+
+
+
+  @media screen and (max-width:767px) {
+
+    .hidden {
+
+display: none;
+}
+
+   .mobH {
+
+    display: none;
+   }
+   .netflix-logo{
+
+    width: 80px;
+   }
+    
+}
+
+
+
 `;
+
+const BoxVertical = styled.div `
+
+@media screen and (max-width:767px) {
+
+  width: 200px;
+    height: 40vh;
+    background-color: #be7979;
+
+
+
+    
+}
+
+   
+
+`
 
  const BoxAnchors = () => {
   return (
     <Box1>
+        <BoxVertical className='hidden'/>
       <Link className="btn__link" to="/">
-        <Logo src={Netflix} alt="Netflix-Logo" />
+        <Logo className='netflix-logo' src={Netflix} alt="Netflix-Logo" />
       </Link>
 
       <Menu>
+
+    
         <li>
-          <Link className="btn__link" to="/">
+          <Link className="btn__link mobH" to="/">
             <ItemLinks>Inicio</ItemLinks>
           </Link>
         </li>
         <li>
-          <Link className="btn__link" to="/movies">
+          <Link className="btn__link mobH" to="/movies">
             <ItemLinks>Filmes</ItemLinks>
           </Link>
         </li>
         <li>
-          <Link className="btn__link" to="/series">
+          <Link className="btn__link mobH" to="/series">
             <ItemLinks>Séries</ItemLinks>
           </Link>
         </li>
         <li>
-          <Link className="btn__link" to="/popular">
+          <Link className="btn__link mobH" to="/popular">
             <ItemLinks>Popular</ItemLinks>
           </Link>
         </li>
         <li>
-          <Link className="btn__link" to="/lista/1">
+          <Link className="btn__link mobH" to="/lista/1">
           <ItemLinks href="/">Lista</ItemLinks>
           </Link>
          

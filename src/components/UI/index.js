@@ -136,4 +136,54 @@ export const ModalMetaDescription = styled.p `
     color: transparent;
 
 
+
+
+`
+
+export const ModalBox = styled.div`
+  background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    margin: 0rem;
+
+   :active  {
+      margin-top: 5rem;
+      background-color: black;
+      height: 200px;
+      width: 200px;
+      border-radius: 1rem;
+      border: 1px solid white;
+      animation: animeBox .5s;
+      flex-direction: column;
+      margin-right: ${(props) => props.primary};
+    }
+
+    :active .giftTitle {
+
+      display: flex;
+      color: white;
+    }
+
+    .giftTitle {
+      display: none;
+    }
+
+
+
+    @keyframes animeBox {
+
+      from {
+
+        transform: translate3d(0,-40px,0);
+      }
+
+      to {
+
+
+        transform: translate3d(0,0,0);
+      }
+    }
 `

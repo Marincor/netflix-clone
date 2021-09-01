@@ -22,6 +22,17 @@ const SearchInput = styled.input`
       transform: translate3d(0, 0, 0);
     }
   }
+
+  @media screen and (max-width:767px) {
+    
+    margin-left: 1rem;
+    width: 6rem;
+    padding: 1rem 1rem;
+    
+    
+}
+
+
 `;
 
 const SearchForm = () => {
