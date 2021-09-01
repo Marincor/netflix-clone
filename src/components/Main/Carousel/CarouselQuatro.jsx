@@ -39,28 +39,32 @@ const CarouselQuatro = () => {
     });
   }, []);
 
-   // - - -- - state of context list - - - -- //
+ // - - -- - state of context list - - - -- //
 
-  const { moviesId, setMoviesId } = React.useContext(ListContext);
+ const { seriesId, setSeriesId } = React.useContext(ListContext);
 
-  let vetorIdMovies = moviesId.arr || [];
+ let vetorIdMovies = seriesId.arr || [];
+
+
+
+
+ function HandleList(e) {
+   const currentMovie = e.target.parentElement.id;
+
+   vetorIdMovies.push(currentMovie);
   
-  function HandleList(e) {
-    const currentMovie = e.target.parentElement.id;
-    console.log(currentMovie)
-    vetorIdMovies.push(currentMovie);
-    setMoviesId({ ...moviesId, arr: vetorIdMovies });
-    localStorage.setItem('userMovieList', JSON.stringify( vetorIdMovies))
-  }
 
-
+   setSeriesId({ ...seriesId, arr: vetorIdMovies });
+   localStorage.setItem('userMovieListSeries', JSON.stringify( vetorIdMovies))
+ 
+ }
 
 /* because of an error in the carousel component library, I decided to set manually the images background in render, instead of an map method in the array */
 
   return (
     <BoxSlider>
-      <Link className='btn__link' to='/bem-avaliados'>
-          <CardSession>Bem avaliados:</CardSession>
+      <Link className='btn__link' to='/series'>
+          <CardSession>Séries do momento:</CardSession>
       </Link>
      
       <Carousel

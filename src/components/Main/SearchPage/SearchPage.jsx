@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ApiSearchItens } from "../../../services/services";
-import { BotaoDefault } from "../../UI";
+import { BotaoDefault, BotaoList } from "../../UI";
 import {
   BoxArrows,
   BoxCardsItems,
@@ -11,6 +11,7 @@ import Lottie from "react-lottie";
 import arrowNext from "../../../assets/lotties/arrow-forward.json";
 import arrowPrevious from "../../../assets/lotties/arrow-back.json";
 import { SearchContext } from "../../../contexts/SearchContext";
+import { ListContext } from "../../../contexts/UserListContext";
 
 
 const SearchPage = () => {
@@ -106,6 +107,60 @@ const SearchPage = () => {
        
   }) ;
 
+
+
+   // - - -- - state of context list - - - -- //
+
+   const { seriesId, setSeriesId } = React.useContext(ListContext);
+
+  
+   const { moviesId, setMoviesId } = React.useContext(ListContext);
+
+   let vetorIdMovies = moviesId.arr || [];
+    let vetorIdSeries = seriesId.arr || [];
+
+ 
+   function HandleList(e) {
+
+
+     const currentMovie = e.target.parentElement.id;
+
+
+    const currentMovieClass = e.target.parentElement;
+
+     
+
+
+    
+    
+ 
+
+     // --- if series -- //
+if(!currentMovieClass.classList.contains('movie')) {
+  vetorIdSeries.push(currentMovie);
+  console.log('is a série')
+
+  setSeriesId({ ...seriesId, arr: vetorIdSeries });
+  localStorage.setItem('userMovieListSeries', JSON.stringify( vetorIdSeries))
+
+
+}
+   ///  movie --//
+else {
+
+  console.log('is a movie')
+  vetorIdMovies.push(currentMovie);
+   
+  setMoviesId({ ...moviesId, arr: vetorIdMovies });
+  localStorage.setItem('userMovieList', JSON.stringify( vetorIdMovies))
+
+
+}
+
+    
+  
+ 
+   }
  
 
   return (
@@ -113,11 +168,18 @@ const SearchPage = () => {
       {series.map((item, index) => {
         return (
           <>
-        
+      
             <BoxCardsItems
               key={index}
               poster={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${item.poster_path}`}
-            />
+              id={item.id}
+              className={item.media_type}
+              >
+              <BotaoList key={`BotaoListMovie - ${index}`} onClick={HandleList}>
+
+              ➕
+              </BotaoList>
+            </BoxCardsItems>
           </>
         );
       })}

@@ -48,22 +48,22 @@ const Series = () => {
 
   // pages config //
 
-  const [pageMovies, setPageMovies] = useState(1);
+  const [pageSeries, setPageSeries] = useState(1);
   const [movies, setMovies] = useState([]);
 
   function previousPage() {
-    if (pageMovies !== 1) {
+    if (pageSeries !== 1) {
       setArrowBack({ ...arrowBack, isStopped: !arrowBack.isStopped });
 
       setTimeout(() => {
         setArrowBack({ ...arrowBack, isStopped: !arrowBack.isStopped });
       }, 1);
-      setPageMovies(pageMovies - 1);
+      setPageSeries(pageSeries - 1);
     }
   }
 
   function nextPage() {
-    if (pageMovies !== 500) {
+    if (pageSeries !== 500) {
       setArrowForward({ ...arrowForward, isStopped: !arrowForward.isStopped });
 
       setTimeout(() => {
@@ -73,12 +73,12 @@ const Series = () => {
         });
       }, 1);
 
-      setPageMovies(pageMovies + 1);
+      setPageSeries(pageSeries + 1);
     }
   }
 
   useEffect(() => {
-    ApiTvSeriesPage(pageMovies).then((data) => {
+    ApiTvSeriesPage(pageSeries).then((data) => {
       setMovies(data.results);
     });
   });
