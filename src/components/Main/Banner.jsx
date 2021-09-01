@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { BotaoDefault, Icons } from "../UI/index";
+import { BotaoDefault, BotaoList, Icons } from "../UI/index";
 import Play from "../../assets/img/play.svg";
 import { ApiMovie, ApiMovieVideos } from "../../services/services";
 import { GlobalFont } from "../UI/variables";
@@ -9,7 +9,8 @@ import { Route, Switch } from "react-router";
 import { Link } from "react-router-dom";
 import Lottie from "react-lottie-player";
 import animationData from "../../assets/lotties/close.json";
-import Detail from '../../assets/img/detail.svg'
+import Detail from "../../assets/img/detail.svg";
+import { ListContext } from "../../contexts/UserListContext";
 
 const BannerContainer = styled.section`
   display: flex;
@@ -59,7 +60,6 @@ const MovieInfo = styled.h3`
   display: flex;
   justify-content: flex-start;
   align-items: center;
- 
 `;
 
 const MovieInfoYear = styled(MovieInfo)`
@@ -96,6 +96,10 @@ const BtnTrailer = styled(BotaoDefault)`
   position: relative;
 `;
 
+const TitleAdd = styled.p`
+  color: white;
+`;
+
 const Banner = () => {
   const [movieTitle, setMovieTitle] = useState("");
   const [movieInfo, setMovieInfo] = useState("");
@@ -104,11 +108,9 @@ const Banner = () => {
   const [movieReleaseYear, setMovieReleaseYear] = useState("");
   const [movieNote, setMovieNote] = useState("");
   const [movieGenre, setMovieGenre] = useState("");
+  const [movieId, setMovieId] = useState("");
 
   const [movieTrailer, setmovieTrailer] = useState("");
-
-
-
 
   useEffect(() => {
     ApiMovieVideos().then((data) => {
@@ -145,6 +147,7 @@ const Banner = () => {
           `https://www.themoviedb.org/t/p/original/q2CtXYjp9IlnfBcPktNkBPsuAEO.jpg`
         );
         setmovieTrailer("sHRiMXd5fos");
+        setMovieId(77);
       } else {
         const newDate = (date) => {
           const ArrayDate = date.split("-") || "nothing";
@@ -163,9 +166,31 @@ const Banner = () => {
         setPosteRMovie(
           `https://www.themoviedb.org/t/p/original${data.backdrop_path}`
         );
+        setMovieId(data.id);
       }
     });
   }, []);
+
+  // - - -- - state of context list - - - -- //
+
+  const { moviesId, setMoviesId } = React.useContext(ListContext);
+
+  let vetorIdMovies = moviesId.arr || [];
+
+  function HandleList(e) {
+    const currentMovie = e.target.id;  
+    const idNotRepeated =  moviesId.arr.find(atribute => atribute === currentMovie)
+
+if(idNotRepeated === undefined) {
+
+  vetorIdMovies.push(currentMovie);
+
+  setMoviesId({ ...moviesId, arr: vetorIdMovies });
+  localStorage.setItem("userMovieList", JSON.stringify(vetorIdMovies));
+}
+
+  
+  }
 
   return (
     <Router>
@@ -175,7 +200,7 @@ const Banner = () => {
             <BoxContent>
               <MovieTitleBanner>{movieTitle}</MovieTitleBanner>
               <MovieInfoYear>
-              <Icons src={Detail} />
+                <Icons src={Detail} />
                 Data de lançamento: {movieReleaseYear} | Gênero: {movieGenre} |
                 Nota da comunidade: {movieNote}
               </MovieInfoYear>
@@ -190,6 +215,13 @@ const Banner = () => {
                     <Icons src={Play} alt="play-icon" /> Play
                   </BotaoDefault>
                 </Link>
+                <BotaoDefault>
+                  {" "}
+                  <BotaoList id={movieId} onClick={HandleList}>
+                    ➕
+                  </BotaoList>{" "}
+                  <TitleAdd>Adicionar à lista</TitleAdd>
+                </BotaoDefault>
               </div>
             </BoxContent>
           </Route>
@@ -199,12 +231,12 @@ const Banner = () => {
               <Link className="btn__link" to="/">
                 <BtnTrailer>
                   <div>
-                  <Lottie
-            loop
-            animationData={animationData}
-            play
-            style={{ width: 50, height: 50 }}
-          />
+                    <Lottie
+                      loop
+                      animationData={animationData}
+                      play
+                      style={{ width: 50, height: 50 }}
+                    />
                   </div>
                 </BtnTrailer>
               </Link>
@@ -225,5 +257,4 @@ const Banner = () => {
   );
 };
 
-
-export default Banner
+export default Banner;

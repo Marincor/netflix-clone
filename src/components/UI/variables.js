@@ -63,11 +63,50 @@ export const BoxCardsItems = styled.div`
   cursor: pointer;
   display: flex;
   background-color: #adadc0;
-  display: flex;
+  flex-direction: column;
   align-items: flex-end;
 
  
+.modal {
 
+  display: flex;
+  position: relative;
+  background-color: transparent;
+  font-family: ${GlobalFont};
+  animation: anime .5s;
+
+}
+
+.modal:hover .modal {
+  visibility: visible;
+
+  color: black;
+}
+
+.modal:hover {
+  visibility: visible;
+  background-color: lightgray;
+  animation: anime .2;
+  color: black;
+  position: relative;
+}
+
+
+
+
+
+
+@keyframes anime {
+
+  from {
+    transform: translate3d(0,-60px,0);
+  }
+
+  to {
+    transform: translate3d(0,0,0);
+  }
+
+}
 
 `;
 

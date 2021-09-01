@@ -2,7 +2,6 @@ import React from "react";
 import {  BoxContent } from "../../UI/variables";
 import { ListContext } from "../../../contexts/UserListContext";
 import {  BoxLine, TitleSection } from "../../UI";
-import MoviesItems from "./MoviesItems";
 import SeriesItems from "./SeriesItems";
 import { Link } from "react-router-dom";
 

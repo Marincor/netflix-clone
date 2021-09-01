@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { ApiMoviesPage } from "../../../services/services";
 import {
-  ApiMoviesPage
-} from "../../../services/services";
-import { BotaoList, BotaoDefault } from "../../UI";
+  BotaoList,
+  BotaoDefault,
+  BoxModalCard,
+  ModalTitle,
+  ModalInfo,
+  ModalMetaDescription,
+} from "../../UI";
 import {
   BoxArrows,
   BoxCardsItems,
@@ -14,14 +19,7 @@ import arrowNext from "../../../assets/lotties/arrow-forward.json";
 import arrowPrevious from "../../../assets/lotties/arrow-back.json";
 import { ListContext } from "../../../contexts/UserListContext";
 
-
-
-
-
-
 const MoviesPage = () => {
-
-
   // Lottie config / /
   const [arrowForward, setArrowForward] = useState({
     isStopped: true,
@@ -48,11 +46,7 @@ const MoviesPage = () => {
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
-
-
   };
-
-    
 
   // pages config //
 
@@ -98,24 +92,32 @@ const MoviesPage = () => {
   let vetorIdMovies = moviesId.arr || [];
 
 
- 
-  
 
 
+
+  // ------ Add to list --- //
 
   function HandleList(e) {
     const currentMovie = e.target.parentElement.id;
- 
-    vetorIdMovies.push(currentMovie);
-   
 
-    setMoviesId({ ...moviesId, arr: vetorIdMovies });
-    localStorage.setItem('userMovieList', JSON.stringify( vetorIdMovies))
-  
+    const idNotRepeated = moviesId.arr.find(
+      (atribute) => atribute === currentMovie
+    );
+
+    if (idNotRepeated === undefined) {
+      vetorIdMovies.push(currentMovie);
+
+      setMoviesId({ ...moviesId, arr: vetorIdMovies });
+      localStorage.setItem("userMovieList", JSON.stringify(vetorIdMovies));
+    }
   }
 
   return (
-    <BoxContent paddingTop={"10rem"} primaryColor={"black"} key={'ContentMovie'}>
+    <BoxContent
+      paddingTop={"10rem"}
+      primaryColor={"black"}
+      key={"ContentMovie"}
+    >
       {movies.map((item, index) => {
         return (
           <div key={`divMovie - ${index}`}>
@@ -124,9 +126,13 @@ const MoviesPage = () => {
               id={item.id}
               poster={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${item.poster_path}`}
             >
+              <BoxModalCard className='modal'>
+                <ModalTitle  className='modal'>{item.title}</ModalTitle>
+                <ModalInfo className='modal'>{item.original_title}</ModalInfo>
+                <ModalMetaDescription className='modal'>{item.overview}</ModalMetaDescription>
+              </BoxModalCard>
               <BotaoList key={`BotaoListMovie - ${index}`} onClick={HandleList}>
-
-              ➕
+                ➕
               </BotaoList>
             </BoxCardsItems>
           </div>
@@ -159,6 +165,5 @@ const MoviesPage = () => {
     </BoxContent>
   );
 };
-
 
 export default MoviesPage;

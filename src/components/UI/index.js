@@ -90,3 +90,50 @@ export const BotaoList = styled.button `
   }
 
 `
+
+export const BoxModalCard = styled.div `
+
+ 
+    background-color: transparent;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+      color:black;
+    
+ 
+`
+
+export const ModalTitle = styled.h2 `
+
+    padding: 1rem;
+    color: transparent;
+    font-size: 1.5rem;
+    font-weight: bold;
+    
+
+` 
+export const ModalInfo = styled.p `
+
+    font-size: 0.8rem;
+    color: transparent;
+    margin: 1rem 0rem;
+    font-style: italic;
+
+`
+
+export const ModalMetaDescription = styled.p `
+
+    
+    overflow: auto;
+    font-size: 0.8rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1rem;
+    height: 100%;
+    color: transparent;
+
+
+`

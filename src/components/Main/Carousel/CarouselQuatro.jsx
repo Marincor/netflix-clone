@@ -5,7 +5,7 @@ import {
   autoplayPlugin,
 } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
-import { ApiMovieTopRated, ApiTvSeries } from "../../../services/services";
+import {  ApiTvSeries } from "../../../services/services";
 import { BoxSlider, BoxCards, CardSession } from "../../UI/variables";
 import { Link } from "react-router-dom";
 import { BotaoList } from "../../UI";
@@ -51,11 +51,19 @@ const CarouselQuatro = () => {
  function HandleList(e) {
    const currentMovie = e.target.parentElement.id;
 
-   vetorIdMovies.push(currentMovie);
+   const idNotRepeated =  seriesId.arr.find(atribute => atribute === currentMovie)
+
+   if(idNotRepeated === undefined) { 
+
+    vetorIdMovies.push(currentMovie);
   
 
-   setSeriesId({ ...seriesId, arr: vetorIdMovies });
-   localStorage.setItem('userMovieListSeries', JSON.stringify( vetorIdMovies))
+    setSeriesId({ ...seriesId, arr: vetorIdMovies });
+    localStorage.setItem('userMovieListSeries', JSON.stringify( vetorIdMovies))
+
+   }
+
+  
  
  }
 

@@ -50,10 +50,18 @@ const CarouselTres = () => {
  
  function HandleList(e) {
    const currentMovie = e.target.parentElement.id;
-   console.log(e.target.parentElement)
-   vetorIdMovies.push(currentMovie);
-   setMoviesId({ ...moviesId, arr: vetorIdMovies });
-   localStorage.setItem('userMovieList', JSON.stringify( vetorIdMovies))
+
+
+   const idNotRepeated =  moviesId.arr.find(atribute => atribute === currentMovie)
+
+   if(idNotRepeated === undefined) {
+
+    vetorIdMovies.push(currentMovie);
+    setMoviesId({ ...moviesId, arr: vetorIdMovies });
+    localStorage.setItem('userMovieList', JSON.stringify( vetorIdMovies))
+
+   }
+  
  }
 
 

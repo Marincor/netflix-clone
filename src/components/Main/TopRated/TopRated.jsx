@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ApiMovieTopRatedPage } from "../../../services/services";
-import { BotaoDefault, BotaoList } from "../../UI";
+import { BotaoDefault, BotaoList, BoxModalCard, ModalInfo, ModalMetaDescription, ModalTitle } from "../../UI";
 import {
   BoxArrows,
   BoxCardsItems,
@@ -97,12 +97,21 @@ const TopRated = () => {
 
   function HandleList(e) {
     const currentMovie = e.target.parentElement.id;
- 
-    vetorIdMovies.push(currentMovie);
+
+    const idNotRepeated =  moviesId.arr.find(atribute => atribute === currentMovie)
+
+    if(idNotRepeated === undefined) { 
+
+
+
+      vetorIdMovies.push(currentMovie);
    
 
-    setMoviesId({ ...moviesId, arr: vetorIdMovies });
-    localStorage.setItem('userMovieList', JSON.stringify( vetorIdMovies))
+      setMoviesId({ ...moviesId, arr: vetorIdMovies });
+      localStorage.setItem('userMovieList', JSON.stringify( vetorIdMovies))
+    }
+ 
+   
   
   }
 
@@ -116,6 +125,11 @@ const TopRated = () => {
               id={item.id}
               poster={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${item.poster_path}`}
             >
+               <BoxModalCard className='modal'>
+                <ModalTitle  className='modal'>{item.title}</ModalTitle>
+                <ModalInfo className='modal'>{item.original_title}</ModalInfo>
+                <ModalMetaDescription className='modal'>{item.overview}</ModalMetaDescription>
+              </BoxModalCard>
               <BotaoList key={`BotaoListMovie - ${index}`} onClick={HandleList}>
 
               ➕

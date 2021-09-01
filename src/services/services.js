@@ -109,7 +109,7 @@ export async function ApiPopularTrendingPage() {
 
 export async function ApiSearchItens(e, num) {
   const url = `
-  https://api.themoviedb.org/3/search/multi?api_key=${key}&language=en-US&query=${e}&page=${num}&include_adult=false`;
+  https://api.themoviedb.org/3/search/multi?api_key=${key}&language=pt-BR&query=${e}&page=${num}&include_adult=false`;
 
   return await fetch(url).then((response) => response.json());
 }
@@ -132,3 +132,4 @@ export async function ApiSeriesList(id) {
 
   return await fetch(url).then((response) => response.json());
 }
+

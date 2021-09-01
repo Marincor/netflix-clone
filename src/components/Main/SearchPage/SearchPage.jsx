@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { ApiSearchItens } from "../../../services/services";
-import { BotaoDefault, BotaoList } from "../../UI";
+import {
+  BotaoDefault,
+  BotaoList,
+  BoxModalCard,
+  ModalInfo,
+  ModalMetaDescription,
+  ModalTitle,
+} from "../../UI";
 import {
   BoxArrows,
   BoxCardsItems,
@@ -12,7 +19,6 @@ import arrowNext from "../../../assets/lotties/arrow-forward.json";
 import arrowPrevious from "../../../assets/lotties/arrow-back.json";
 import { SearchContext } from "../../../contexts/SearchContext";
 import { ListContext } from "../../../contexts/UserListContext";
-
 
 const SearchPage = () => {
   // Lottie config / /
@@ -45,12 +51,12 @@ const SearchPage = () => {
 
   // pages config //
 
-  const {searchInput} = React.useContext(SearchContext);
-
-  
+  const { searchInput } = React.useContext(SearchContext);
 
   const [pageSeries, setPageSeries] = useState(1);
-  const [contentSearch, setContentSearch] = useState(searchInput.content || '.')
+  const [contentSearch, setContentSearch] = useState(
+    searchInput.content || "."
+  );
   const [series, setSeries] = useState([]);
   function previousPage() {
     if (pageSeries !== 1) {
@@ -79,112 +85,99 @@ const SearchPage = () => {
   }
 
   useEffect(() => {
-    ApiSearchItens(contentSearch,pageSeries).then((data) => setSeries(data.results));
-   
-   
-        const form = document.querySelector('form');
-        
-        form.addEventListener('submit', (e)=>{
-                e.preventDefault();
-                const typedContent = e.target[0].value;
-            
+    ApiSearchItens(contentSearch, pageSeries).then((data) =>
+      setSeries(data.results)
+    );
 
-               if(typedContent !== '') {
+    const form = document.querySelector("form");
 
-              
-                setContentSearch(typedContent)
-            
-                  
-            
-                   
-               }
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const typedContent = e.target[0].value;
 
-                
-                
+      if (typedContent !== "") {
+        setContentSearch(typedContent);
+      }
+    });
+  });
 
-        })
+  // - - -- - state of context list - - - -- //
 
-       
-  }) ;
+  const { seriesId, setSeriesId } = React.useContext(ListContext);
 
+  const { moviesId, setMoviesId } = React.useContext(ListContext);
 
+  let vetorIdMovies = moviesId.arr || [];
+  let vetorIdSeries = seriesId.arr || [];
 
-   // - - -- - state of context list - - - -- //
-
-   const { seriesId, setSeriesId } = React.useContext(ListContext);
-
-  
-   const { moviesId, setMoviesId } = React.useContext(ListContext);
-
-   let vetorIdMovies = moviesId.arr || [];
-    let vetorIdSeries = seriesId.arr || [];
-
- 
-   function HandleList(e) {
-
-
-     const currentMovie = e.target.parentElement.id;
-
+  function HandleList(e) {
+    const currentMovie = e.target.parentElement.id;
 
     const currentMovieClass = e.target.parentElement;
 
-     
+    // --- if series -- //
+    if (!currentMovieClass.classList.contains("movie")) {
+      const idNotRepeated = seriesId.arr.find(
+        (atribute) => atribute === currentMovie
+      );
 
+      if (idNotRepeated === undefined) {
+        vetorIdSeries.push(currentMovie);
+        console.log("is a série");
 
-    
-    
- 
+        setSeriesId({ ...seriesId, arr: vetorIdSeries });
+        localStorage.setItem(
+          "userMovieListSeries",
+          JSON.stringify(vetorIdSeries)
+        );
+      }
+    }
+    ///  movie --//
+    else {
+      console.log("is a movie");
 
-     // --- if series -- //
-if(!currentMovieClass.classList.contains('movie')) {
-  vetorIdSeries.push(currentMovie);
-  console.log('is a série')
+      const idNotRepeated = moviesId.arr.find(
+        (atribute) => atribute === currentMovie
+      );
+      if (idNotRepeated === undefined) {
+        vetorIdMovies.push(currentMovie);
 
-  setSeriesId({ ...seriesId, arr: vetorIdSeries });
-  localStorage.setItem('userMovieListSeries', JSON.stringify( vetorIdSeries))
-
-
-}
-   ///  movie --//
-else {
-
-  console.log('is a movie')
-  vetorIdMovies.push(currentMovie);
-   
-  setMoviesId({ ...moviesId, arr: vetorIdMovies });
-  localStorage.setItem('userMovieList', JSON.stringify( vetorIdMovies))
-
-
-}
-
-    
-  
- 
-   }
- 
+        setMoviesId({ ...moviesId, arr: vetorIdMovies });
+        localStorage.setItem("userMovieList", JSON.stringify(vetorIdMovies));
+      }
+    }
+  }
 
   return (
     <BoxContent paddingTop={"10rem"} primaryColor={"black"}>
       {series.map((item, index) => {
         return (
           <>
-      
             <BoxCardsItems
               key={index}
               poster={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${item.poster_path}`}
               id={item.id}
               className={item.media_type}
-              >
+            >
+              <BoxModalCard className="modal">
+                <ModalTitle className="modal">
+                  {item.title || item.name}
+                </ModalTitle>
+                <ModalInfo className="modal">
+                  {item.original_title || item.original_name}
+                </ModalInfo>
+                <ModalMetaDescription className="modal">
+                  {item.overview}
+                </ModalMetaDescription>
+              </BoxModalCard>
               <BotaoList key={`BotaoListMovie - ${index}`} onClick={HandleList}>
-
-              ➕
+                ➕
               </BotaoList>
             </BoxCardsItems>
           </>
         );
       })}
       <BoxArrows>
-       
         <BotaoDefault onClick={previousPage}>
           <p>teste</p>
           <BoxLottie className="teste">

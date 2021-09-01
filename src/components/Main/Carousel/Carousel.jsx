@@ -51,9 +51,19 @@ const CarouselUm = () => {
   function HandleList(e) {
     const currentMovie = e.target.parentElement.id;
 
+
+    const idNotRepeated =  moviesId.arr.find(atribute => atribute === currentMovie)
+
+    if(idNotRepeated === undefined) { 
+
+
+        
     vetorIdMovies.push(currentMovie);
     setMoviesId({ ...moviesId, arr: vetorIdMovies });
     localStorage.setItem('userMovieList', JSON.stringify( vetorIdMovies))
+
+    }
+
   }
 
 

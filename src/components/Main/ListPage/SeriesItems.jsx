@@ -2,7 +2,7 @@
 import React , {useState, useEffect}from 'react';
 import { ListContext } from '../../../contexts/UserListContext';
 import { ApiSeriesList } from '../../../services/services';
-import { BotaoList } from '../../UI';
+import { BotaoList, BoxModalCard, ModalInfo, ModalMetaDescription, ModalTitle } from '../../UI';
 import { BoxCardsItems } from '../../UI/variables';
 
 
@@ -11,7 +11,7 @@ const SeriesItems = () =>{
  // pages config //
 
  const { seriesId } = React.useContext(ListContext);
- const [seriesPoster, setSeriesPoster] = useState([]);
+ const [series, setSeries] = useState([]);
 
 
 
@@ -25,12 +25,12 @@ const SeriesItems = () =>{
 // ---------- Series ---------- /
 
 const posterReqs2 = seriesId.arr.map((item) => {
-    return ApiSeriesList(item).then((data) => data.poster_path);
+    return ApiSeriesList(item).then((data) => data);
   });
 
-  Promise.all(posterReqs2).then((posters) => {
-    const UserDataEntry = posters || [];
-    setSeriesPoster(UserDataEntry);
+  Promise.all(posterReqs2).then((data) => {
+    const UserDataEntry = data || [];
+    setSeries(UserDataEntry);
   });
 
    
@@ -97,14 +97,19 @@ const posterReqs2 = seriesId.arr.map((item) => {
 
     return(
         <>
-             {seriesPoster.map((item, index) => {
+             {series.map((item, index) => {
             return (
               <>
                 <BoxCardsItems
                   key={index}
                   id={seriesId.arr[index]}
-                  poster={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${item}`}
+                  poster={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${item.poster_path}`}
                 >
+                  <BoxModalCard className='modal'>
+                <ModalTitle  className='modal'>{item.name}</ModalTitle>
+                <ModalInfo className='modal'>{item.original_name}</ModalInfo>
+                <ModalMetaDescription className='modal'>{item.overview}</ModalMetaDescription>
+              </BoxModalCard>
                   <BotaoList onClick={deleteCard}>❌</BotaoList>
                 </BoxCardsItems>
               </>
