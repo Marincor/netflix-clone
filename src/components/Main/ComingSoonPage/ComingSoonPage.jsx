@@ -11,7 +11,7 @@ import Lottie from "react-lottie";
 import arrowNext from "../../../assets/lotties/arrow-forward.json";
 import arrowPrevious from "../../../assets/lotties/arrow-back.json";
 
-export default () => {
+const ComingSoonPage =  () => {
   // Lottie config / /
   const [arrowForward, setArrowForward] = useState({
     isStopped: true,
@@ -46,7 +46,7 @@ export default () => {
   const [series, setSeries] = useState([]);
 
   function previousPage() {
-    if (pageSeries != 1) {
+    if (pageSeries !== 1) {
       setArrowBack({ ...arrowBack, isStopped: !arrowBack.isStopped });
 
       setTimeout(() => {
@@ -57,7 +57,7 @@ export default () => {
   }
 
   function nextPage() {
-    if (pageSeries != 500) {
+    if (pageSeries !== 500) {
       setArrowForward({ ...arrowForward, isStopped: !arrowForward.isStopped });
 
       setTimeout(() => {
@@ -121,3 +121,6 @@ export default () => {
     </BoxContent>
   );
 };
+
+
+export default ComingSoonPage;

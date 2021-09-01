@@ -10,7 +10,7 @@ import { BoxSlider, BoxCards, CardSession } from "../../UI/variables";
 import { Link } from "react-router-dom";
 
 
-export default () => {
+const CarouselDois = () => {
   const [posters, setPosters] = useState([]);
   
 
@@ -23,7 +23,7 @@ export default () => {
       let arrPoster = [];
   
   
-      data.results.map((item) => {
+      data.results.forEach((item) => {
         arrPoster.push(item.poster_path);
         
       
@@ -183,3 +183,7 @@ export default () => {
     </BoxSlider>
   );
 };
+
+
+
+export default CarouselDois;

@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
+
 import { BoxContent } from "../../UI/variables";
-import InfiniteScroll from "../infinite Scroll/InfiniteScroll";
+import InfiniteScrollUm from "../infinite Scroll/InfiniteScrollUm";
 
 
 
 
-export default () => {
+
+const BoxContentHome = () => {
   return (
     <BoxContent >
    
-      <InfiniteScroll />
-
+      <InfiniteScrollUm />
    
     </BoxContent>
   );
 };
+
+export default BoxContentHome;

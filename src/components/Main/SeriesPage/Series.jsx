@@ -11,7 +11,7 @@ import Lottie from "react-lottie";
 import arrowNext from "../../../assets/lotties/arrow-forward.json";
 import arrowPrevious from "../../../assets/lotties/arrow-back.json";
 
-export default () => {
+const Series = () => {
   // Lottie config / /
   const [arrowForward, setArrowForward] = useState({
     isStopped: true,
@@ -46,7 +46,7 @@ export default () => {
   const [series, setSeries] = useState([]);
 
   function previousPage() {
-    if (pageSeries != 1) {
+    if (pageSeries !== 1) {
       setArrowBack({ ...arrowBack, isStopped: !arrowBack.isStopped });
 
       setTimeout(() => {
@@ -57,7 +57,7 @@ export default () => {
   }
 
   function nextPage() {
-    if (pageSeries != 500) {
+    if (pageSeries !== 500) {
       setArrowForward({ ...arrowForward, isStopped: !arrowForward.isStopped });
 
       setTimeout(() => {
@@ -83,7 +83,7 @@ export default () => {
         return (
           <>
             <BoxCardsItems
-              key={index}
+              key={`BoxSeries - ${index}`}
               poster={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${item.poster_path}`}
             />
           </>
@@ -91,8 +91,8 @@ export default () => {
       })}
       <BoxArrows>
         {" "}
-        <BotaoDefault onClick={previousPage}>
-          <BoxLottie className="teste">
+        <BotaoDefault key={`Botao ${1}`} onClick={previousPage}>
+          <BoxLottie key={`box ${1}`} className="teste">
             <Lottie
               options={defaultOptions2}
               height={50}
@@ -117,3 +117,6 @@ export default () => {
     </BoxContent>
   );
 };
+
+
+export default Series;

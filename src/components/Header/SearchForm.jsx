@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { SearchContext } from "../../contexts/SearchContext";
@@ -24,7 +24,7 @@ const SearchInput = styled.input`
   }
 `;
 
-export default () => {
+const SearchForm = () => {
   const history = useHistory();
   const { searchInput, setSearchInput } = React.useContext(SearchContext);
 
@@ -53,3 +53,6 @@ export default () => {
     </form>
   );
 };
+
+
+export default SearchForm

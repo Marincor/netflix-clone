@@ -7,7 +7,7 @@ import { BoxLottie } from "../../UI/variables";
 import InfiniteScrollTres from "./InfiniteScrollTres";
 
 
-export default () => {
+const InfiniteScrollDois =  () => {
     const [items, setItems] = useState(Array.from({ length: 0.1 }));
     const [hasMore, setHasMore] = useState(true);
 
@@ -73,3 +73,5 @@ export default () => {
 
 
 }
+
+export default InfiniteScrollDois

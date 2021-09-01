@@ -114,3 +114,15 @@ export async function ApiSearchItens(e, num) {
   return await fetch(url).then((response) => response.json());
 }
 
+
+
+
+
+ // -- - -- - - -- Render List ---------- //
+
+ 
+export async function ApiMovieList(id) {
+  const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${key}&language=pt-BR`;
+
+  return await fetch(url).then((response) => response.json());
+}

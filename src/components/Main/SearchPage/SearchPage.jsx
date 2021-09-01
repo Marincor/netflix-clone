@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { ApiSearchItens } from "../../../services/services";
 import { BotaoDefault } from "../../UI";
 import {
@@ -13,7 +13,7 @@ import arrowPrevious from "../../../assets/lotties/arrow-back.json";
 import { SearchContext } from "../../../contexts/SearchContext";
 
 
-export default () => {
+const SearchPage = () => {
   // Lottie config / /
   const [arrowForward, setArrowForward] = useState({
     isStopped: true,
@@ -52,7 +52,7 @@ export default () => {
   const [contentSearch, setContentSearch] = useState(searchInput.content || '.')
   const [series, setSeries] = useState([]);
   function previousPage() {
-    if (pageSeries != 1) {
+    if (pageSeries !== 1) {
       setArrowBack({ ...arrowBack, isStopped: !arrowBack.isStopped });
 
       setTimeout(() => {
@@ -63,7 +63,7 @@ export default () => {
   }
 
   function nextPage() {
-    if (pageSeries != 500) {
+    if (pageSeries !== 500) {
       setArrowForward({ ...arrowForward, isStopped: !arrowForward.isStopped });
 
       setTimeout(() => {
@@ -88,7 +88,7 @@ export default () => {
                 const typedContent = e.target[0].value;
             
 
-               if(typedContent != '') {
+               if(typedContent !== '') {
 
               
                 setContentSearch(typedContent)
@@ -150,3 +150,5 @@ export default () => {
     </BoxContent>
   );
 };
+
+export default SearchPage;

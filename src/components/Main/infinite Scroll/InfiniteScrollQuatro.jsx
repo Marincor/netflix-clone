@@ -6,7 +6,7 @@ import { BoxLottie } from "../../UI/variables";
 import CarouselQuatro from "../Carousel/CarouselQuatro";
 
 
-export default () => {
+const InfiniteScrollQuatro = () => {
     const [items, setItems] = useState(Array.from({ length: 0.1 }));
     const [hasMore, setHasMore] = useState(true);
 
@@ -71,3 +71,5 @@ export default () => {
 
 
 }
+
+export default InfiniteScrollQuatro;

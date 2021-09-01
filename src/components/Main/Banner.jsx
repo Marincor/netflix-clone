@@ -4,14 +4,14 @@ import { BotaoDefault, Icons } from "../UI/index";
 import Play from "../../assets/img/play.svg";
 import { ApiMovie, ApiMovieVideos } from "../../services/services";
 import { GlobalFont } from "../UI/variables";
-import Star from "../../assets/img/red-star.svg";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch } from "react-router";
 import { Link } from "react-router-dom";
 import Lottie from "react-lottie";
 import animationData from "../../assets/lotties/close.json";
+import Detail from '../../assets/img/detail.svg'
 
-const Banner = styled.section`
+const BannerContainer = styled.section`
   display: flex;
   width: 100vw;
   height: 100vh;
@@ -56,11 +56,14 @@ const MovieInfo = styled.h3`
   font-weight: bold;
   margin: 2rem 0rem;
   width: 80%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+ 
 `;
 
 const MovieInfoYear = styled(MovieInfo)`
   font-style: italic;
-
   margin: 0.1rem;
   font-size: 0.8rem;
 `;
@@ -93,7 +96,7 @@ const BtnTrailer = styled(BotaoDefault)`
   position: relative;
 `;
 
-export default () => {
+const Banner = () => {
   const [movieTitle, setMovieTitle] = useState("");
   const [movieInfo, setMovieInfo] = useState("");
   const [movieMetaDescription, setMovieMetaDescription] = useState("");
@@ -174,14 +177,15 @@ export default () => {
 
   return (
     <Router>
-      <Banner poster={posterMovie}>
+      <BannerContainer poster={posterMovie}>
         <Switch>
           <Route exact path="/">
             <BoxContent>
               <MovieTitleBanner>{movieTitle}</MovieTitleBanner>
               <MovieInfoYear>
+              <Icons src={Detail} />
                 Data de lançamento: {movieReleaseYear} | Gênero: {movieGenre} |
-                Nota da comunidade: {movieNote} <Icons src={Star} />{" "}
+                Nota da comunidade: {movieNote}
               </MovieInfoYear>
               <MovieInfo>{movieInfo}</MovieInfo>
               <MovieMetadescription>
@@ -213,7 +217,6 @@ export default () => {
               </Link>
               <MovieTrailer
                 width="560"
-                allow="autoplay"
                 height="315"
                 src={`https://www.youtube.com/embed/${movieTrailer}?autoplay=1&mute=1`}
                 title="YouTube video player"
@@ -224,7 +227,10 @@ export default () => {
             </BoxTrailer>
           </Route>
         </Switch>
-      </Banner>
+      </BannerContainer>
     </Router>
   );
 };
+
+
+export default Banner

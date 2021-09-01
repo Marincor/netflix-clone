@@ -6,7 +6,7 @@ import { BoxLottie } from "../../UI/variables";
 
 
 
-export default () => {
+const InitialLoad = () => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -24,3 +24,6 @@ export default () => {
     </Box>
   );
 };
+
+
+export default InitialLoad;

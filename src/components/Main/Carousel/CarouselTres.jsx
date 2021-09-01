@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 
 
-export default () => {
+const CarouselTres = () => {
   const [posters, setPosters] = useState([]);
   
 
@@ -24,7 +24,7 @@ export default () => {
       let arrPoster = [];
         console.log(data)
   
-      data.results.map((item) => {
+      data.results.forEach((item) => {
         arrPoster.push(item.poster_path);
         
       
@@ -182,3 +182,6 @@ export default () => {
     </BoxSlider>
   );
 };
+
+
+export default CarouselTres;

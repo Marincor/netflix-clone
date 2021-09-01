@@ -8,8 +8,7 @@ import {
 } from "../../UI/variables";
 
 
-
-export default () => {
+const PopularPage = () => {
  
 
  
@@ -46,3 +45,6 @@ export default () => {
     </BoxContent>
   );
 };
+
+
+export default PopularPage;

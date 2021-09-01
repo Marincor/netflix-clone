@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Carousel from "../Carousel/Carousel";
 import InfiniteScrollDois from "./InfiniteScrollDois";
 import Lottie from 'react-lottie';
 import animationData from '../../../assets/lotties/load.json'
 import { BoxLottie } from "../../UI/variables";
+import CarouselUm from "../Carousel/Carousel";
 
 
 
@@ -12,7 +12,7 @@ import { BoxLottie } from "../../UI/variables";
 
 
 
-export default () => {
+ const  InfiniteScrollUm = () => {
 
 
     const [items, setItems] = useState(Array.from({ length: 0.1 }));
@@ -65,7 +65,7 @@ export default () => {
 
        
         <div>
-            <Carousel />
+            <CarouselUm />
             <InfiniteScrollDois/>
         </div>
        
@@ -84,3 +84,6 @@ export default () => {
 
 
 }
+
+
+export default InfiniteScrollUm

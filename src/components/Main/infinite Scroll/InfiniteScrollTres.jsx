@@ -7,7 +7,7 @@ import CarouselTres from "../Carousel/CarouselTres";
 import InfiniteScrollQuatro from "./InfiniteScrollQuatro";
 
 
-export default () => {
+const InfiniteScrollTres = () => {
     const [items, setItems] = useState(Array.from({ length: 0.1 }));
     const [hasMore, setHasMore] = useState(true);
 
@@ -73,3 +73,5 @@ export default () => {
 
 
 }
+
+export default InfiniteScrollTres;

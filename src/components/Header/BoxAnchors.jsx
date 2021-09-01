@@ -21,7 +21,7 @@ const Box1 = styled.nav`
   margin-left: 2rem;
 `;
 
-export default () => {
+ const BoxAnchors = () => {
   return (
     <Box1>
       <Link className="btn__link" to="/">
@@ -46,14 +46,19 @@ export default () => {
         </li>
         <li>
           <Link className="btn__link" to="/popular">
-            {" "}
             <ItemLinks>Popular</ItemLinks>
           </Link>
         </li>
         <li>
+          <Link className="btn__link" to="/lista">
           <ItemLinks href="/">Lista</ItemLinks>
+          </Link>
+         
         </li>
       </Menu>
     </Box1>
   );
 };
+
+
+export default BoxAnchors

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { GlobalFont } from "./variables";
 
 export const Logo = styled.img`
   width: 111px;
@@ -43,4 +44,49 @@ export const Box = styled.div`
   width: 100vw;
   height: 100vh;
   color: black;
+  z-index: 3000;
+  position: fixed;
+ 
 `;
+
+export const BoxLine = styled.div `
+
+  background-color: black;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: auto;
+
+`
+
+export const TitleSection = styled.h2 `
+
+  word-spacing: -0.2rem;
+  font-size: 1rem;
+  font-family: ${GlobalFont};
+
+
+`
+
+export const BotaoList = styled.button `
+
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 20rem;
+  padding: 1rem;
+  
+  :hover {
+
+    background-color: black;
+
+  }
+
+  :active {
+
+      padding: 2rem;
+
+  }
+
+`

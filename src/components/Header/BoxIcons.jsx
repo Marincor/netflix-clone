@@ -16,7 +16,7 @@ const Box2 = styled.nav`
   justify-content: space-around;
 `;
 
-export default () => {
+const BoxIcons = () => {
  
  
 
@@ -51,3 +51,5 @@ export default () => {
     </Box2>
   );
 };
+
+export default BoxIcons

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { ApiMoviesPage, ApiPopularTrendingPage } from "../../../services/services";
-import { BotaoDefault } from "../../UI";
+import {
+  ApiMoviesPage
+} from "../../../services/services";
+import { BotaoList, BotaoDefault } from "../../UI";
 import {
   BoxArrows,
   BoxCardsItems,
@@ -10,8 +12,14 @@ import {
 import Lottie from "react-lottie";
 import arrowNext from "../../../assets/lotties/arrow-forward.json";
 import arrowPrevious from "../../../assets/lotties/arrow-back.json";
+import { ListContext } from "../../../contexts/UserListContext";
 
-export default () => {
+
+
+
+
+
+const MoviesPage = () => {
   // Lottie config / /
   const [arrowForward, setArrowForward] = useState({
     isStopped: true,
@@ -38,7 +46,11 @@ export default () => {
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
+
+
   };
+
+    
 
   // pages config //
 
@@ -46,7 +58,7 @@ export default () => {
   const [movies, setMovies] = useState([]);
 
   function previousPage() {
-    if (pageMovies != 1) {
+    if (pageMovies !== 1) {
       setArrowBack({ ...arrowBack, isStopped: !arrowBack.isStopped });
 
       setTimeout(() => {
@@ -56,10 +68,8 @@ export default () => {
     }
   }
 
- 
-
   function nextPage() {
-    if (pageMovies != 500) {
+    if (pageMovies !== 500) {
       setArrowForward({ ...arrowForward, isStopped: !arrowForward.isStopped });
 
       setTimeout(() => {
@@ -74,28 +84,49 @@ export default () => {
   }
 
   useEffect(() => {
-    ApiMoviesPage(pageMovies).then((data) => setMovies(data.results));
-
-
-   
+    ApiMoviesPage(pageMovies).then((data) => {
+      setMovies(data.results);
+    });
   });
 
+  // - - -- - state of context list - - - -- //
 
+  const { moviesId, setMoviesId } = React.useContext(ListContext);
+
+  let vetorIdMovies = moviesId.arr || [];
+
+ 
+  
+
+
+
+  function HandleList(e) {
+    const currentMovie = e.target.parentElement.id;
+console.log(e)
+    vetorIdMovies.push(currentMovie);
+    setMoviesId({ ...moviesId, arr: vetorIdMovies });
+    localStorage.setItem('userMovieList', JSON.stringify( vetorIdMovies))
+  }
 
   return (
-    <BoxContent paddingTop={"10rem"} primaryColor={"black"}>
+    <BoxContent paddingTop={"10rem"} primaryColor={"black"} key={'ContentMovie'}>
       {movies.map((item, index) => {
         return (
-          <>
+          <div key={`divMovie - ${index}`}>
             <BoxCardsItems
-              key={index}
+              key={`BoxMovie - ${index}`}
+              id={item.id}
               poster={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${item.poster_path}`}
-            />
-          </>
+            >
+              <BotaoList key={`BotaoListMovie - ${index}`} onClick={HandleList}>
+
+              ➕
+              </BotaoList>
+            </BoxCardsItems>
+          </div>
         );
       })}
       <BoxArrows>
-        {" "}
         <BotaoDefault onClick={previousPage}>
           <BoxLottie className="teste">
             <Lottie
@@ -122,3 +153,6 @@ export default () => {
     </BoxContent>
   );
 };
+
+
+export default MoviesPage;
