@@ -114,7 +114,6 @@ const Series = () => {
   return (
     <BoxContent paddingTop={"10rem"} primaryColor={"black"} key={'ContentMovie'}>
       {movies.map((item, index) => {
-      { console.log(movies)}
         return (
           <div key={`divMovie - ${index}`}>
             <BoxCardsItems

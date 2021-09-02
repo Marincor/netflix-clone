@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { BotaoDefault, GifBox, Icons, ModalBox, modalBox, ProfileIcon } from "../UI/index";
+import { BotaoDefault,  Icons, ModalBox, ProfileIcon } from "../UI/index";
 import Search from "../../assets/img/search.svg";
 import Gift from "../../assets/img/gift.svg";
 import Bell from "../../assets/img/bell.svg";

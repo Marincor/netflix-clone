@@ -16,7 +16,6 @@ const BannerContainer = styled.section`
   display: flex;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
   background-image: ${(props) => `url(${props.poster})`};
   background-position: top;
   background-size: cover;
@@ -32,9 +31,10 @@ const BoxContent = styled.div`
   width: 636px;
   height: 100vh;
   text-align: left;
-  margin-left: 4rem;
-  margin-top: 15%;
-
+  padding-left: 4rem;
+  background:linear-gradient(to right, rgba(0,0,0,0.8) 80%, transparent);
+  padding-top: 15%;
+  
   .div_btn {
     margin-top: 1rem;
   }
@@ -70,10 +70,14 @@ const MovieInfoYear = styled(MovieInfo)`
 
 const MovieMetadescription = styled.p`
   font-size: 1rem;
-  color: white;
+  display: -webkit-box;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  color: darkgray;
   width: 80%;
   height: 20%;
-  overflow: auto;
   line-height: 1.5rem;
 `;
 
@@ -100,6 +104,13 @@ const TitleAdd = styled.p`
   color: white;
 `;
 
+const InfoText = styled.h2 `
+
+  margin: 0rem 1rem;
+  color: ${(props) => props.color}
+
+`
+
 const Banner = () => {
   const [movieTitle, setMovieTitle] = useState("");
   const [movieInfo, setMovieInfo] = useState("");
@@ -119,7 +130,7 @@ const Banner = () => {
       ) {
         console.log("erro " + data.status_message);
       } else {
-        console.log(data.videos.results.length);
+      
 
         data.videos.results.length > 1
           ? setmovieTrailer(data.videos.results[0].key)
@@ -192,6 +203,29 @@ if(idNotRepeated === undefined) {
   
   }
 
+
+  function colorbyRated () {
+
+
+    let colorNote = 'white';
+
+   if(movieNote >= 6) {
+    
+    colorNote = 'green'
+
+   } else if(movieNote < 7 || movieNote > 5) {
+
+    colorNote = 'yellow'
+   } else {
+
+
+    colorNote = 'red'
+   }
+ 
+    return colorNote;
+
+  }
+
   return (
     <Router>
       <BannerContainer poster={posterMovie}>
@@ -200,9 +234,11 @@ if(idNotRepeated === undefined) {
             <BoxContent>
               <MovieTitleBanner>{movieTitle}</MovieTitleBanner>
               <MovieInfoYear>
-                <Icons src={Detail} />
-                Data de lançamento: {movieReleaseYear} | Gênero: {movieGenre} |
-                Nota da comunidade: {movieNote}
+                <Icons src={Detail} inverted />
+                <InfoText> {movieReleaseYear} </InfoText>
+                <InfoText>{movieGenre} </InfoText>
+                <InfoText color={colorbyRated}>{movieNote}</InfoText>
+              
               </MovieInfoYear>
               <MovieInfo>{movieInfo}</MovieInfo>
               <MovieMetadescription>
@@ -212,7 +248,7 @@ if(idNotRepeated === undefined) {
                 <Link className="btn__link" to="/trailer">
                   <BotaoDefault inverted>
                     {" "}
-                    <Icons src={Play} alt="play-icon" /> Play
+                    <Icons src={Play} alt="play-icon" /> Assistir
                   </BotaoDefault>
                 </Link>
                 <BotaoDefault>

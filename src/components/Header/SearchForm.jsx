@@ -25,8 +25,8 @@ const SearchInput = styled.input`
 
   @media screen and (max-width:767px) {
     
-    margin-left: 1rem;
-    width: 6rem;
+    margin-left: 0rem;
+    width:2.5rem;
     padding: 1rem 1rem;
     
     
