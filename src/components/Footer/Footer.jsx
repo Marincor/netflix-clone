@@ -122,7 +122,7 @@ export  const Footer = () => {
                     <BotaoDefault><Icons alt='youtube-icon' inverted src={Youtube}/></BotaoDefault> 
                     </BoxMedia>
 
-            <LinkFooter href='#'> <TitleCode> Code</TitleCode></LinkFooter>
+            <LinkFooter href='https://github.com/Marincor/netflix-clone'> <TitleCode> Code</TitleCode></LinkFooter>
 
             <Rights>© 2021 Netflix, Inc</Rights>
             </BoxContainer>
@@ -137,7 +137,7 @@ export  const Footer = () => {
         <BoxContainer>
 
             
-        <Explanation>Esse site foi feito com o propósito de um estudo prático de técnologias como React Js e styled components. Foi utilizado o banco de dados da <LinkFooter>"TMDB - The Movie Data Base".</LinkFooter> Clone codado por <LinkFooter href='#'>Marincor.</LinkFooter> </Explanation>
+        <Explanation>Esse site foi feito com o propósito de um estudo prático de técnologias como React Js e styled components. Foi utilizado o banco de dados da <LinkFooter href='https://www.themoviedb.org/documentation/api'>"TMDB - The Movie Data Base".</LinkFooter> Clone codado por <LinkFooter href='https://github.com/Marincor'>Marincor.</LinkFooter> </Explanation>
         </BoxContainer>
          
 
