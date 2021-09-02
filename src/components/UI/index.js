@@ -78,7 +78,6 @@ export const BoxLine = styled.div `
 
 export const TitleSection = styled.h2 `
 
-  word-spacing: 1rem;
   font-size: 1rem;
   font-family: ${GlobalFont};
 
