@@ -15,7 +15,7 @@ export const BoxSlider = styled.div`
   width: 100vw;
   height: 100%;
   background-color: black;
-  font-family: ${GlobalFont};
+
 
   .slider {
     background-color: black;
@@ -134,7 +134,7 @@ export const CardSession = styled.h2`
   font-size: 2rem;
   margin-top: 2rem;
   padding: 1rem;
-  word-spacing: -0.8rem;
+  word-spacing: 1rem;
   width: 80vw;
 `;
 
