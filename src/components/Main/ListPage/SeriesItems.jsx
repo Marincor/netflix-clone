@@ -11,16 +11,17 @@ const SeriesItems = () =>{
 
   // -- Toastify config -- //
 
-const notify = () =>
-toast.success("Série excluída da lista", {
-  position: "top-right",
-  autoClose: 5000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-});
+  const notify = () =>
+    toast.success("Série excluída da lista", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
 
  // pages config //
 
@@ -75,7 +76,7 @@ const posterReqs2 = seriesId.arr.map((item) => {
      if (vetor[i] === currentIdTarget) {
 
        vetor.splice(i, 1);
-
+     
      }
      
 
@@ -98,8 +99,8 @@ const posterReqs2 = seriesId.arr.map((item) => {
        if (vetorTwo[i] === currentIdTarget) {
 
            vetorTwo.splice(i, 1);
-           localStorage.setItem('userMovieListSeries', JSON.stringify(vetorTwo))
-          notify();
+           localStorage.setItem('userMovieListSeries', JSON.stringify(vetorTwo));
+           notify();
        }
   
      }
@@ -111,10 +112,7 @@ const posterReqs2 = seriesId.arr.map((item) => {
 
     return(
         <>
-             {series.map((item, index) => {
-            return (
-              <>
-               <div>
+          <div>
                   <ToastContainer
                     className="toaster"
                     position="top-right"
@@ -128,6 +126,10 @@ const posterReqs2 = seriesId.arr.map((item) => {
                     pauseOnHover
                   />
                 </div>
+             {series.map((item, index) => {
+            return (
+              <>
+             
                 <BoxCardsItems
                   key={index}
                   id={seriesId.arr[index]}
