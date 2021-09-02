@@ -158,7 +158,7 @@ export const BoxContent = styled.section`
   margin-left:1rem;
   display: flex;
   flex-wrap: wrap;
-  font-family: ${GlobalFont};
+
  
   
 
