@@ -134,7 +134,7 @@ export const CardSession = styled.h2`
   font-size: 2rem;
   margin-top: 2rem;
   padding: 1rem;
-  word-spacing: 1rem;
+  word-spacing: -0.2rem;
   width: 80vw;
 `;
 
@@ -158,7 +158,7 @@ export const BoxContent = styled.section`
   margin-left:1rem;
   display: flex;
   flex-wrap: wrap;
-
+  font-family: ${GlobalFont};
  
   
 
