@@ -6,13 +6,40 @@ import {
   BoxCardsItems,
   BoxContent,
   BoxLottie,
+  CardSession,
 } from "../../UI/variables";
 import Lottie from "react-lottie";
 import arrowNext from "../../../assets/lotties/arrow-forward.json";
 import arrowPrevious from "../../../assets/lotties/arrow-back.json";
 import { ListContext } from "../../../contexts/UserListContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Series = () => {
+
+  // -- Toastify config -- //
+
+  const notify = () =>
+    toast.success("Adicionado à lista", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+    const notifyError = () =>
+    toast.error("Essa série já está na sua lista!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   // Lottie config / /
   const [arrowForward, setArrowForward] = useState({
@@ -104,7 +131,10 @@ const Series = () => {
 
       setSeriesId({ ...seriesId, arr: vetorIdMovies });
       localStorage.setItem('userMovieListSeries', JSON.stringify( vetorIdMovies))
+      notify();
+    } else {
 
+      notifyError();
     }
    
  
@@ -113,6 +143,21 @@ const Series = () => {
 
   return (
     <BoxContent paddingTop={"10rem"} primaryColor={"black"} key={'ContentMovie'}>
+       <div>
+                  <ToastContainer
+                    className="toaster"
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                  />
+                </div>
+       <CardSession>Séries:</CardSession>
       {movies.map((item, index) => {
         return (
           <div key={`divMovie - ${index}`}>

@@ -22,6 +22,10 @@ export const BoxSlider = styled.div`
     padding: 2rem;
     margin-right: 2rem;
   }
+
+
+
+
 `;
 
 
@@ -44,6 +48,12 @@ export const BoxCards = styled.div`
   align-items: flex-end;
 
  
+  @media screen and (max-width:767px) {
+
+    width: 100px;
+  height: 150px;
+    
+}
 
 
 `;
@@ -108,6 +118,15 @@ export const BoxCardsItems = styled.div`
 
 }
 
+
+
+@media screen and (max-width:767px) {
+
+  width: 275px;
+  height: 410px;
+    
+}
+
 `;
 
 
@@ -115,7 +134,8 @@ export const CardSession = styled.h2`
   font-size: 2rem;
   margin-top: 2rem;
   padding: 1rem;
-  word-spacing: -0.5rem;
+  word-spacing: -0.8rem;
+  width: 80vw;
 `;
 
 
@@ -138,6 +158,7 @@ export const BoxContent = styled.section`
   margin-left:1rem;
   display: flex;
   flex-wrap: wrap;
+  font-family: ${GlobalFont};
  
   
 

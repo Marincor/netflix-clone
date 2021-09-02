@@ -131,8 +131,8 @@ display: none;
 
   const [bar, setBar] = useState({
 
-    isStopped: false,
-    isPaused: false,
+    isStopped: true,
+    isPaused: true,
    
 })
 

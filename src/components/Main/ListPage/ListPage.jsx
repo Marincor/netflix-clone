@@ -6,6 +6,13 @@ import MoviesItems from "./MoviesItems";
 import { Link } from "react-router-dom";
 
 const ListPage = () => {
+
+
+
+
+
+
+
   const { moviesId } = React.useContext(ListContext);
   // welcome //
   let listMessage = "Essa é a sua lista de filmes:";
@@ -17,6 +24,9 @@ const ListPage = () => {
 
   return (
     <BoxContent paddingTop={"10rem"} primaryColor={"black"}>
+      
+
+      
       <BoxLine>
       <Link to='/lista/2' className='btn__link'><TitleSection> ir para a lista de séries  ➨ </TitleSection></Link>  
       </BoxLine>

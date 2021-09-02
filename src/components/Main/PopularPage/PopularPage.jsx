@@ -6,14 +6,40 @@ import {
 
   BoxCardsItems,
   BoxContent,
+  CardSession,
 
 } from "../../UI/variables";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PopularPage = () => {
  
 
- 
+ // -- Toastify config -- //
+
+ const notify = () =>
+ toast.success("Adicionado à lista", {
+   position: "top-right",
+   autoClose: 5000,
+   hideProgressBar: false,
+   closeOnClick: true,
+   pauseOnHover: true,
+   draggable: true,
+   progress: undefined,
+ });
+
+ const notifyError = () =>
+ toast.error("Esse item já está na sua lista!", {
+   position: "top-right",
+   autoClose: 5000,
+   hideProgressBar: false,
+   closeOnClick: true,
+   pauseOnHover: true,
+   draggable: true,
+   progress: undefined,
+ });
+
+
 
   // pages config //
 
@@ -54,7 +80,11 @@ const PopularPage = () => {
 
     setMoviesId({ ...moviesId, arr: vetorIdMovies });
     localStorage.setItem('userMovieList', JSON.stringify( vetorIdMovies))
+    notify();
 
+   } else {
+
+    notifyError();
    }
 
   
@@ -63,6 +93,22 @@ const PopularPage = () => {
 
   return (
     <BoxContent paddingTop={"10rem"} primaryColor={"black"}>
+      
+ <div>
+                  <ToastContainer
+                    className="toaster"
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                  />
+                </div>
+       <CardSession>Populares:</CardSession>
       {movies.map((item, index) => {
         return (
           <>

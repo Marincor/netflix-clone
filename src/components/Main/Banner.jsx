@@ -11,6 +11,8 @@ import Lottie from "react-lottie-player";
 import animationData from "../../assets/lotties/close.json";
 import Detail from "../../assets/img/detail.svg";
 import { ListContext } from "../../contexts/UserListContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BannerContainer = styled.section`
   display: flex;
@@ -19,10 +21,15 @@ const BannerContainer = styled.section`
   background-image: ${(props) => `url(${props.poster})`};
   background-position: top;
   background-size: cover;
-  background-blend-mode: color;
   overflow: hidden;
   font-family: ${GlobalFont};
   align-items: center;
+
+  @media screen and (max-width: 767px) {
+    background-size: 200vh;
+    background-position: bottom;
+    background-repeat: no-repeat;
+  }
 `;
 
 const BoxContent = styled.div`
@@ -32,11 +39,17 @@ const BoxContent = styled.div`
   height: 100vh;
   text-align: left;
   padding-left: 4rem;
-  background:linear-gradient(to right, rgba(0,0,0,0.8) 80%, transparent);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 80%, transparent);
   padding-top: 15%;
-  
+
   .div_btn {
     margin-top: 1rem;
+  }
+
+  @media screen and (max-width: 767px) {
+    width: 75%;
+    padding-top: 10rem;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.4) 80%, transparent);
   }
 `;
 
@@ -49,6 +62,12 @@ const MovieTitleBanner = styled.h2`
   height: auto;
   max-height: 20%;
   overflow: auto;
+
+  @media screen and (max-width: 767px) {
+    font-size: 1.5rem;
+    overflow-x: hidden;
+    text-align: left;
+  }
 `;
 
 const MovieInfo = styled.h3`
@@ -60,18 +79,28 @@ const MovieInfo = styled.h3`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
+  @media screen and (max-width: 767px) {
+    font-size: 0.8rem;
+    text-align: left;
+  }
 `;
 
 const MovieInfoYear = styled(MovieInfo)`
   font-style: italic;
   margin: 0.1rem;
   font-size: 0.8rem;
+
+  @media screen and (max-width: 767px) {
+    font-size: 0.6rem;
+    text-align: left;
+  }
 `;
 
 const MovieMetadescription = styled.p`
   font-size: 1rem;
   display: -webkit-box;
-  overflow : hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
@@ -79,6 +108,13 @@ const MovieMetadescription = styled.p`
   width: 80%;
   height: 20%;
   line-height: 1.5rem;
+
+  @media screen and (max-width: 767px) {
+    font-size: 0.8rem;
+    text-align: left;
+    height: 14%;
+    -webkit-line-clamp: 3;
+  }
 `;
 
 const BoxTrailer = styled.div`
@@ -104,12 +140,10 @@ const TitleAdd = styled.p`
   color: white;
 `;
 
-const InfoText = styled.h2 `
-
+const InfoText = styled.h2`
   margin: 0rem 1rem;
-  color: ${(props) => props.color}
-
-`
+  color: ${(props) => props.color};
+`;
 
 const Banner = () => {
   const [movieTitle, setMovieTitle] = useState("");
@@ -123,6 +157,32 @@ const Banner = () => {
 
   const [movieTrailer, setmovieTrailer] = useState("");
 
+  // -- Toastify config -- //
+
+  const notify = () =>
+    toast.success("Adicionado à lista", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+    const notifyError = () =>
+    toast.error("Esse filme já está na sua lista!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+
+
   useEffect(() => {
     ApiMovieVideos().then((data) => {
       if (
@@ -130,14 +190,12 @@ const Banner = () => {
       ) {
         console.log("erro " + data.status_message);
       } else {
-      
-
         data.videos.results.length > 1
           ? setmovieTrailer(data.videos.results[0].key)
           : console.log("sem video");
       }
 
-      // <iframe width="560" height="315" src="https://www.youtube.com/embed/pz3PMQZFjdc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      
     });
 
     ApiMovie().then((data) => {
@@ -189,41 +247,38 @@ const Banner = () => {
   let vetorIdMovies = moviesId.arr || [];
 
   function HandleList(e) {
-    const currentMovie = e.target.id;  
-    const idNotRepeated =  moviesId.arr.find(atribute => atribute === currentMovie)
+    const currentMovie = e.target.id;
+    const idNotRepeated = moviesId.arr.find(
+      (atribute) => atribute === currentMovie
+    );
 
-if(idNotRepeated === undefined) {
+    if (idNotRepeated === undefined) {
+      vetorIdMovies.push(currentMovie);
 
-  vetorIdMovies.push(currentMovie);
+      setMoviesId({ ...moviesId, arr: vetorIdMovies });
+      localStorage.setItem("userMovieList", JSON.stringify(vetorIdMovies));
+      notify();
+    }else {
 
-  setMoviesId({ ...moviesId, arr: vetorIdMovies });
-  localStorage.setItem("userMovieList", JSON.stringify(vetorIdMovies));
-}
 
-  
+      notifyError();
+    }
+
+    
   }
 
+  function colorbyRated() {
+    let colorNote = "white";
 
-  function colorbyRated () {
+    if (movieNote >= 6) {
+      colorNote = "green";
+    } else if (movieNote < 7 || movieNote > 5) {
+      colorNote = "yellow";
+    } else {
+      colorNote = "red";
+    }
 
-
-    let colorNote = 'white';
-
-   if(movieNote >= 6) {
-    
-    colorNote = 'green'
-
-   } else if(movieNote < 7 || movieNote > 5) {
-
-    colorNote = 'yellow'
-   } else {
-
-
-    colorNote = 'red'
-   }
- 
     return colorNote;
-
   }
 
   return (
@@ -238,7 +293,6 @@ if(idNotRepeated === undefined) {
                 <InfoText> {movieReleaseYear} </InfoText>
                 <InfoText>{movieGenre} </InfoText>
                 <InfoText color={colorbyRated}>{movieNote}</InfoText>
-              
               </MovieInfoYear>
               <MovieInfo>{movieInfo}</MovieInfo>
               <MovieMetadescription>
@@ -251,6 +305,20 @@ if(idNotRepeated === undefined) {
                     <Icons src={Play} alt="play-icon" /> Assistir
                   </BotaoDefault>
                 </Link>
+                <div>
+                  <ToastContainer
+                    className="toaster"
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                  />
+                </div>
                 <BotaoDefault>
                   {" "}
                   <BotaoList id={movieId} onClick={HandleList}>

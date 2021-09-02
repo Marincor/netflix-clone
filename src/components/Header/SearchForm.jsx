@@ -4,14 +4,15 @@ import styled from "styled-components";
 import { SearchContext } from "../../contexts/SearchContext";
 import { GlobalFont } from "../UI/variables";
 
+
 const SearchInput = styled.input`
-  text-align: center;
+ 
+ text-align: center;
   font-family: ${GlobalFont};
   padding: 0.5rem;
   border-radius: 1rem;
   animation: anime 0.5s;
   width: 50%;
-
   margin-left: 15rem;
   @keyframes anime {
     from {
@@ -31,6 +32,21 @@ const SearchInput = styled.input`
     
     
 }
+
+
+@media screen and (min-width:768px) {
+  
+    margin-left: 4rem;
+    
+}
+
+@media screen and (min-width:1024px) {
+
+
+  width: 12rem;
+
+}
+
 
 
 `;

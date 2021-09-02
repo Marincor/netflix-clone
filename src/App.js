@@ -18,6 +18,8 @@ import Page404 from "./components/Page404/Page404";
 import ListPage from "./components/Main/ListPage/ListPage";
 import ListPageDois from "./components/Main/ListPage/ListPage2";
 import { ListProvider } from "./contexts/UserListContext";
+import { Footer } from "./components/Footer/Footer";
+
 
 function App() {
   const [isDisplayed, setIsDisplayed] = useState(true);
@@ -31,6 +33,7 @@ function App() {
     setInterval(() => {
       setIsDisplayed1(true);
     }, 2700);
+  
   }, []);
 
   return (
@@ -39,7 +42,7 @@ function App() {
       <ListProvider>
         <SearchProvider>
           <Header />
-
+        
           <Switch>
             <Route exact path="/">
               {isDisplayed && (
@@ -84,9 +87,14 @@ function App() {
             <Route>
               <Page404 />
             </Route>
+           
           </Switch>
+
+          <Footer />
         </SearchProvider>
+
       </ListProvider>
+     
     </Router>
   );
 }

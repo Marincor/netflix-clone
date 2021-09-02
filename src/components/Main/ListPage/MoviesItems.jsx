@@ -4,9 +4,24 @@ import { ListContext } from '../../../contexts/UserListContext';
 import { ApiMovieList } from '../../../services/services';
 import { BotaoList, BoxModalCard, ModalInfo, ModalMetaDescription, ModalTitle } from '../../UI';
 import { BoxCardsItems } from '../../UI/variables';
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MoviesItems = () =>{
+
+
+  // -- Toastify config -- //
+
+  const notify = () =>
+    toast.success("Filme excluído da lista", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
  // pages config //
 
@@ -86,7 +101,7 @@ const MoviesItems = () =>{
 
            vetorTwo.splice(i, 1);
            localStorage.setItem('userMovieList', JSON.stringify(vetorTwo))
-
+          notify();
        }
   
      }
@@ -101,6 +116,20 @@ const MoviesItems = () =>{
              {movies.map((item, index) => {
             return (
               <>
+               <div>
+                  <ToastContainer
+                    className="toaster"
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                  />
+                </div>
                 <BoxCardsItems
                   key={index}
                   id={moviesId.arr[index]}

@@ -10,10 +10,38 @@ import { BoxSlider, BoxCards, CardSession } from "../../UI/variables";
 import { Link } from "react-router-dom";
 import { ListContext } from "../../../contexts/UserListContext";
 import { BotaoList } from "../../UI";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const CarouselUm = () => {
+
+// -- Toastify config -- //
+
+const notify = () =>
+toast.success("Adicionado à lista", {
+  position: "top-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+});
+
+const notifyError = () =>
+toast.error("Esse filme já está na sua lista!", {
+  position: "top-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+});
+
+
+
   const [posters, setPosters] = useState([]);
   const [ids, setIds] = useState([])
 
@@ -61,7 +89,11 @@ const CarouselUm = () => {
     vetorIdMovies.push(currentMovie);
     setMoviesId({ ...moviesId, arr: vetorIdMovies });
     localStorage.setItem('userMovieList', JSON.stringify( vetorIdMovies))
+    notify();
 
+    }else {
+
+      notifyError();
     }
 
   }
@@ -72,6 +104,20 @@ const CarouselUm = () => {
 
   return (
     <BoxSlider>
+       <div>
+                  <ToastContainer
+                    className="toaster"
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                  />
+                </div>
       <Link className='btn__link' to='/popular'>
       <CardSession>Populares:</CardSession>
       </Link>
@@ -86,6 +132,7 @@ const CarouselUm = () => {
               numberOfSlides: 8,
             },
           },
+          
           {
             resolve: autoplayPlugin,
             options: {
@@ -94,6 +141,39 @@ const CarouselUm = () => {
           },
         ]}
         animationSpeed={2000}
+        breakpoints={{
+          640: {
+            plugins: [
+             {
+               resolve: slidesToShowPlugin,
+               options: {
+                numberOfSlides: 2
+               }
+             },
+           ]
+          },
+          900: {
+            plugins: [
+             {
+               resolve: slidesToShowPlugin,
+               options: {
+                numberOfSlides: 4
+               }
+             },
+             
+           ]
+          },
+          1024: {
+            plugins: [
+             {
+               resolve: slidesToShowPlugin,
+               options: {
+                numberOfSlides: 5
+               }
+             },
+           ]
+          },
+        }}
       >
 
 

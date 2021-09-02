@@ -4,9 +4,23 @@ import { ListContext } from '../../../contexts/UserListContext';
 import { ApiSeriesList } from '../../../services/services';
 import { BotaoList, BoxModalCard, ModalInfo, ModalMetaDescription, ModalTitle } from '../../UI';
 import { BoxCardsItems } from '../../UI/variables';
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SeriesItems = () =>{
+
+  // -- Toastify config -- //
+
+const notify = () =>
+toast.success("Série excluída da lista", {
+  position: "top-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+});
 
  // pages config //
 
@@ -85,7 +99,7 @@ const posterReqs2 = seriesId.arr.map((item) => {
 
            vetorTwo.splice(i, 1);
            localStorage.setItem('userMovieListSeries', JSON.stringify(vetorTwo))
-
+          notify();
        }
   
      }
@@ -100,6 +114,20 @@ const posterReqs2 = seriesId.arr.map((item) => {
              {series.map((item, index) => {
             return (
               <>
+               <div>
+                  <ToastContainer
+                    className="toaster"
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                  />
+                </div>
                 <BoxCardsItems
                   key={index}
                   id={seriesId.arr[index]}

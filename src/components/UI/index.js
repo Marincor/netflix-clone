@@ -24,6 +24,16 @@ export const ItemLinks = styled.p`
   height: 18px;
   color: white;
   margin-right: 1rem;
+
+
+  @media screen and (max-width:1023px) {
+
+    width: 58px;
+  height: 18px;
+  padding-bottom: 0.5rem;
+     
+    
+}
 `;
 
 export const BotaoDefault = styled.button`
@@ -46,6 +56,12 @@ export const Box = styled.div`
   color: black;
   z-index: 3000;
   position: fixed;
+
+  @media screen and (max-width:767px) {
+
+      
+    
+}
  
 `;
 
@@ -65,6 +81,12 @@ export const TitleSection = styled.h2 `
   word-spacing: -0.2rem;
   font-size: 1rem;
   font-family: ${GlobalFont};
+
+  @media screen and (max-width:767px) {
+
+      line-height: 2rem;
+    
+}
 
 
 `
@@ -88,6 +110,19 @@ export const BotaoList = styled.button `
       padding: 2rem;
 
   }
+
+
+
+  @media screen and (max-width:767px) {
+
+    :active {
+
+      padding: 0.5rem;
+
+    }
+
+    
+}
 
 `
 
