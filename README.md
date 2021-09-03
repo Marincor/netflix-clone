@@ -12,7 +12,7 @@ https://netflix-clone-marincor.vercel.app/
 
 # Sobre:
 
-- Conceito de lista de filmes com base no layout da Netflix.
+- Conceito de lista de filmes com base no layout da Netflix. Utilizei o banco de dados da <a href='https://www.themoviedb.org/documentation/api'>TMDB - The Movie Data Base</a>, fazendo requisição da api com fetch. Para transmitir o estado entre os componentes utilizei a api context do React.
 
 > 1º Escolha o filme ou série pelos cards no carrossel, páginas de acesso ou pela busca rápida; 
 
