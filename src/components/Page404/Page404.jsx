@@ -13,10 +13,10 @@ const Orientations = styled.p `
     display: flex;
     justify-content: center;
     width: 100vw;
-    padding-top: 10rem;
+    padding-top: 1rem;
     color: white;
     font-family: ${GlobalFont};
-    word-spacing: -0.2rem;
+   
 
 `
 
